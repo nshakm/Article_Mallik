@@ -1,0 +1,8 @@
+3_datasets/
+4_datasets/
+
+#ignore everything in fig/
+fig/*
+
+#but do not ignore this file
+!fig/bulk_metallicity_comparison_3_datasets_paper.pdf
