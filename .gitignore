@@ -12,3 +12,6 @@ fig/*
 !fig/3.3_corner_plot_comparison_overlay.pdf
 !fig/3.3_box_plot_comparison_radius.pdf
 !fig/3.3_box_plot_comparison_bulk_metallicity.pdf
+
+#bash scripts
+*.sh
