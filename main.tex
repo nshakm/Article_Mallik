@@ -240,13 +240,27 @@ The prior was defined
 
 
 \clearpage
-  \subsection{Correction for radius conversion}
-  \begin{itemize}
-      \item{Observations display measurements of radii with conversion from Earth to Jupiter radii as $R_J = 10.97 R_{\oplus}$. This is the volumetric mean radius of Jupiter.}
-      \item{\texttt{GASTLI} works with $R_J = 11.20 R_{\odot}$, which is the equatorial radius of Jupiter.}
-      \item{It is important to consider that the conversions to Jupiter radii are consistent across our analyses.}
-      \item{}
-  \end{itemize}
+  % \subsection{Correction for radius conversion}
+  \subsection{Consistency in Scaling for Planetary Radius}
+  % \begin{itemize}
+  %     \item{Observations display measurements of radii with conversion from Earth to Jupiter radii as $R_{J, \text{mean}} = 10.97\, R_{\oplus}$. This is the volumetric mean radius of Jupiter.}
+  %     \item{\texttt{GASTLI} works with $R_{J, \text{eq}} = 11.20\, R_{\oplus}$, which is the equatorial radius of Jupiter.}
+  %     \item{It is important to consider that the conversions to Jupiter radii are consistent across our analyses.}
+  %     \item{Thus, both observation and retrieval should use a consistent conversion factor. Either, $R_{J, \text{mean}}$ or $R_{J, \text{eq}}$.}
+  %     \item{To highlight the impact an inappropriate conversion has, one can observe the difference in retrievals for different radii in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}.}
+  % \end{itemize}
+
+  A source of systematic error in exoplanetary characterisation might arise from the inconsistent use of Jupiter's reference radius. Observations typically report planetary radii scaled to the volumetric mean radius of Jupiter ($R_{J, \text{mean}} = 10.97\, R_{\oplus}$). Meanwhile, thermal evolution and interior characterisation tools, such as \texttt{GASTLI}, scale according to Juipter's equatorial radius ($R_{J, \text{eq}} = 11.20\, R_{\oplus}$) \citep{acuna_gastli_2024}. 
+  % \skipline
+
+  To ensure a self-consistent analysis for our retrieval framework, a correction factor $k_J = R_{J, \text{eq}} / R_{J, \text{mean}} \approx 1.021$ must be applied to the observed radii. Failure to account for this discrepancy leads to a systematic bias in the inferred bulk properties.  
+  % 0.02 change in radius, leads to 0.05 change in bulk metallicity -> TODO: decide if this information should be included!
+  To quantify this effect, we compared two retrievals for the planet K2-114 b:
+  \begin{enumerate}
+      \item{\textbf{Uncorrected:} Observations are used directly without accounting for the $R_{J, \text{mean}}$ to $R_{J, \text{eq}}$ offset.}
+      \item{\textbf{Corrected:} Observations are scaled by $k_J$ to match the \texttt{GASTLI} framework.}
+  \end{enumerate}
+
 
   % \begin{figure}[!h]
   %     \centering
@@ -265,11 +279,21 @@ The prior was defined
   \begin{figure}[!h]
       \centering
       \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay.pdf}
-      \caption{Posterior distributions for the radius $R_p$ and bulk metallicity $Z_p$ from retrievals performed based on \texttt{GASTLI}. }
+      \caption{Posterior distributions for the radius $R_p$ and bulk metallicity $Z_p$\
+      % from retrievals performed based on \texttt{GASTLI}\
+      of planet K2-114 b. Thesis results are in gray, while the internship ones are in red. Thesis: $R_p = 0.93^{+0.03}_{-0.03}\, R_J$, $Z_p = 0.30^{+0.07}_{-0.07}$. Internship: $R_p = 0.95^{+0.03}_{-0.03}\, R_J$, $Z_p = 0.26^{+0.08}_{-0.08}$.}
       \label{fig:3.3_corner_plot_comparison_overlay}
   \end{figure}
 
-\clearpage
+    % Thesis: $R_p = 0.93 \pm 0.03\, R_J$, $Z_p = 0.26 \pm 0.08$
+    % Internship: $R_p = 0.95 \pm 0.03\, R_J$, $Z_p = 0.26 \pm 0.08$
+
+
+  Thesis did not make any corrections. Observations were assumed to work with volumetric mean radius, while the analysis with \texttt{GASTLI} worked with the equatorial radius.
+  Internship enhanced observations by a factor of $k = R_{J, \text{eq}} / R_{J, \text{mean}}$ to enure consistency with \texttt{GASTLI}'s framework.
+  Thus, Thesis predicted a higher $Z_p$ for the same planet for which Internship predicts a lower value. This is because Internship assumes a larger planet, thus making it less dense and therefore inferring a lower value for $Z_p$.
+
+% \clearpage
   \begin{figure}[!h]
       \centering
       \includegraphics[width=\hsize]{fig/3.3_box_plot_comparison_radius.pdf}
