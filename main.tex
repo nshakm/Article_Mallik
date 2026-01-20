@@ -109,7 +109,7 @@ explicit the general conclusions that can be drawn from the paper.}
 
 \subsection{Planet Catalogue}
 
-The sample of planets used for this work is from the PlanetS catalogue \citep{parc_super-earths_2024}, which itself is based on the NASA Exoplanet Archive. The focus was on planets with masses between 0.1 and 3 $M_J$ and equilibrium temperatures of $T_{\text{eq}} \le 1000\: \si{\kelvin}$. Characterisation of their interiors is more feasible as these planets are not strongly inflated. The sample is extended by three recently detected planets around M-dwarfs: TOI-762 A b \citep{hartman_toi_2024}, TOI-5176 A b and TOI-6034 b \citep[priv. comm. Shubham Kanodia;][]{muller_bulk_2025}. 
+The sample of planets used for this work is from the PlanetS catalogue \citep{parc_super-earths_2024}, which itself is based on the NASA Exoplanet Archive. The focus was on planets with masses between 0.1 and 3 $M_J$ and equilibrium temperatures of $T_{\text{eq}} \le 1000\: \si{\kelvin}$. Characterisation of their interiors is more feasible as these planets are not strongly inflated. The sample is extended by three recently detected planets around M-dwarfs: TOI-762 A b \citep{hartman_toi_2024}, TOI-5176 A b and TOI-6034 b \citep[priv. comm. Shubham Kanodia;][]{muller_bulk_2025}, leading to a total sample size of 80 exoplanets.
 % The sample can also be split into two sets: planets around FGK stars and planets around M-dwarfs, which have an effective temperature of $T_{\text{eff}} \le 3900\: \si{\kelvin}$.
 % TODO: planet catalogue for P25 ? \\
 % TODO: planet catalogue for T19 ?
@@ -123,8 +123,19 @@ The sample of planets used for this work is from the PlanetS catalogue \citep{pa
 % 124) TOI-5176 A b
 % 130) TOI-6034 b
 
+
 % \subsection{Model Parameters}
-\subsection{Thermal Evolution}
+\subsection{Thermal Evolution Tools}
+TODO: Intro text about different thermal evolution tools
+\begin{itemize}
+    \item{Talk about how we worked with GASTLI}
+    \item{Comparison of results from GASTLI was done for the exact same planets on planetsynth (total 80)}
+    \item{Both results are also compared to a study that used CEPAM on a small subset of that same catalogue (total 32)}
+    \item{Another study was used for comparison, this one is observational? (total 6)}
+\end{itemize}
+
+ 
+\subsubsection{GASTLI}
 
 % TODO: describe this study and that is uses GASTLI + what it is + its parameters (EoS) \\
 \texttt{GASTLI} \citep{acuna_gastli_2024} was used for the thermal evolution of planets. It numerically solves the 1D equations that describe the interior structure and thermal evolution equations, coupled to equations of state (EoS). The interior consists of 2 distinct regions, following the core and envelope model. The atmosphere is defined as the region above the boundary of the interior at $P_{\text{surf}} = 1000\: \si{\bar}$. 
@@ -240,7 +251,7 @@ The prior was defined
   \begin{figure*}[!h]
       \centering
       \includegraphics[width=\hsize]{fig/3.2_trend_comparison.pdf}
-      \caption{Inferred bulk metallicity $Z_p$ as a function of planetary mass $M_p$. }
+      \caption{Inferred bulk metallicity $Z_p$ as a function of planetary mass for $M_p \in [0.01, 3]\, M_J$. \textit{Top panel}: Scatter points and error bars show inferred values for bulk metallicity. The solid lines are their respective fits constructed using orthogonal distance regression. Shaded areas around these lines are the $1\sigma$ uncertainties of this fit. Results from \texttt{GASTLI} and \texttt{planetsynth} are depicted in orange and blue respectively. \textit{Bottom panel}: Residuals of the inferred bulk metallicity values between the two thermal evolution tools. These are calculated by subtracting the \texttt{planetsynth} values fron the \texttt{GASTLI} values.}
       \label{fig:3.2_trend_comparison}
   \end{figure*}
 
