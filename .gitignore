@@ -6,6 +6,8 @@ fig/*
 
 #but do not ignore this file
 !fig/3.1_bulk_metallicity_comparison_3_datasets_paper.pdf
+!fig/3.1_bulk_metallicity_comparison_4_datasets_paper.pdf
+!fig/3.1_bulk_metallicity_comparison_4_datasets_normalised_p
 !fig/3.2_trend_comparison.pdf
 !fig/3.3_corner_plot_comparison_Thesis.pdf
 !fig/3.3_corner_plot_comparison_Internship.pdf
