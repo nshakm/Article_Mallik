@@ -101,6 +101,10 @@ explicit the general conclusions that can be drawn from the paper.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 % \lipsum[1]
+TODO:
+\begin{itemize}
+    \item{Structure of paper}
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \section{Citations and maths examples}
@@ -132,28 +136,32 @@ TODO: Intro text about different thermal evolution tools
     \item{Comparison of results from GASTLI was done for the exact same planets on planetsynth (total 80)}
     \item{Both results are also compared to a study that used CEPAM on a small subset of that same catalogue (total 32)}
     \item{Another study was used for comparison, this one is observational? (total 6)}
+    \item{If only compared to observational study, then (total 14)}
 \end{itemize}
 
  
-\subsubsection{GASTLI}
+\subsubsection{Tool 1: \texttt{GASTLI}}
 
 % TODO: describe this study and that is uses GASTLI + what it is + its parameters (EoS) \\
 \texttt{GASTLI} \citep{acuna_gastli_2024} was used for the thermal evolution of planets. It numerically solves the 1D equations that describe the interior structure and thermal evolution equations, coupled to equations of state (EoS). The interior consists of 2 distinct regions, following the core and envelope model. The atmosphere is defined as the region above the boundary of the interior at $P_{\text{surf}} = 1000\: \si{\bar}$. 
 
-Previous studies, such as \cite{howard_giant_2025}, have shown how the choice of EoS has a significant impact on thermal evolution and the inference of planetary properties. \texttt{GASTLI} uses the following EoS: SESAME \citep{lyon_sesame_1992} for silicate in the core, CD21 \citep{chabrier_new_2021} for H/He in the envelope, M19 \citep{mazevet_ab_2019} \& AQUA \citep{haldemann_aqua_2020} for pure water in the envelope and atmosphere.
+Previous studies, such as \cite{howard_giant_2025}, have shown how the choice of EoS has a significant impact on thermal evolution and the inference of planetary properties. 
+% \texttt{GASTLI} uses the following EoS: SESAME \citep{lyon_sesame_1992} for silicate in the core, CD21 \citep{chabrier_new_2021} for H/He in the envelope, M19 \citep{mazevet_ab_2019} \& AQUA \citep{haldemann_aqua_2020} for pure water in the envelope and atmosphere.
+In this work, we focus on the H/He species and note that \texttt{GASTLI} uses the CD21 EoS \citep{chabrier_new_2021} for hydrogen and helium in the envelope. The atmospheric model is petitCODE \citep{molliere_model_2015}.
 
 The results of thermal evolution sequences used to generate a grid with dimensions of core mass fraction $\text{CMF}$, mass $M_p\: [M_J]$, equilibrium temperature $T_{\text{eq}}\: [\si{\kelvin}]$
 % internal temperature $T_{\text{int}}\: [\si{\kelvin}]$. 
 and age $\tau_p\: [\si{\giga\year}]$.
-The remaining results of the thermal evolution sequences were overlayed on this grid and we implemented linear interpolation (\texttt{scipy.interpolate.RegularGridInterpolator}). The envelope metallicity was set constant to solar value $Z_{\text{eq}} = Z_{\odot} = 0.014$ \citep{lodders_abundances_2009, ekstrom_grids_2012}. 
-
-    
-
-
+The remaining results of the thermal evolution sequences were overlayed on this grid and we implemented linear interpolation (\texttt{scipy.interpolate.RegularGridInterpolator}). The envelope metallicity was set constant to solar value $Z_{\text{eq}} = Z_{\odot} = 0.014$ \citep{lodders_abundances_2009, ekstrom_grids_2012}. A grid was also created created with the thermal evolution sequences similar to what was previously described. 
 
 % Thermal evolution models were generated using \texttt{GASTLI} from \citep{acuna_gastli_2024}. \texttt{GASTLI} is a thermal evolution tool, that models planets as 2 distinctive regions: the interior (consisting of the core and envelope) and the atmosphere. The tool numerically solves the 1D equations that interior structure and thermal evolution. 
 
 % Outputs of the thermal evolution models include planetary radius $R_{\text{out}}$, mass $M_{\text{out}}$ and age $\tau_{\text{out}}$. These models were also used to construct a grid defined by the axes: core mass fraction $\text{CMF}$, envelope metallicity $Z_{\text{env}}$ (set to the solar value $Z_{\text{env}} = Z_{\odot} = 0.014$ for this work), planetary mass $M$, equilibrium temperature $T_{\text{eq}}$ and internal temperature $T_{\text{int}}$. Predictions for the radius $R_{\text{pred}}$, mass $M_{\text{pred}}$ and age $\tau_{\text{pred}}$ were obtained by interpolating along this discrete grid using Piecewise Cubic Hermite Interpolating Polynomials (PCHIP) from the Python package \texttt{SciPy}.
+
+
+\subsubsection{Tool 2: \texttt{planetsynth}}
+\texttt{planetsynth} \citep{muller_synthetic_2021} is the main tool we used for comparison to \texttt{GASTLI}. This tool also solves planetary equations for interior structures and thermal evolution coupled with a set of EoS. The EoS for H/He was modified to also use CD21, instead of CMS19 \citep{chabrier_new_2019} as in the initial version of the tool. 
+
 
 
 \subsection{$Z_p$ Inference}
@@ -234,14 +242,14 @@ The prior was defined
   \subsection{Thermal Evolution Tools}
   \begin{figure*}[!t]
       \centering
-      \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_3_datasets_paper.pdf}
-      \caption{Probability distributions of inferred bulk metallicities $Z_p$ of four planets from the catalogue. The curves representing results of \texttt{GASTLI} and \texttt{planetsynth} are obtained using Gaussian KDEs in blue and orange respectively. \texttt{CEPAM} results are represented by the dashed-dotted line.}
+      \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_3_datasets_cepam_paper.pdf}
+      \caption{Probability distributions of inferred bulk metallicities $Z_p$ of four planets from the catalogue. The curves representing results of \texttt{GASTLI} and \texttt{planetsynth} are obtained using Gaussian KDEs in blue and orange respectively. \texttt{CEPAM} results are represented by the dashed line.}
       \label{fig:3.1_bulk_metallicity_comparison_3_datasets}
   \end{figure*}
 
   \begin{figure*}
       \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_4_datasets_paper.pdf}
-      \caption{Same as Fig.~\ref{fig:3.1_bulk_metallicity_comparison_3_datasets} but for four different planets. An additional study is used for reference and is represented by the dashed line.}
+      \caption{Same as Fig.~\ref{fig:3.1_bulk_metallicity_comparison_3_datasets} but for four different planets. An additional study is used for reference and is represented by the dotted-dashed line.}
       \label{fig:3.1_bulk_metallicity_comparison_4_datasets}
   \end{figure*}
   
