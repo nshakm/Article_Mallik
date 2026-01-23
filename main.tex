@@ -265,7 +265,12 @@ The prior was defined
 
 
 \clearpage
-
+  \begin{figure*}
+      \centering
+      \includegraphics[width=\hsize]{fig/3.2_trend_comparison_new.pdf}
+      \caption{TODO}
+      \label{fig:3.2_trend_comparison}
+  \end{figure*}
   
 \clearpage
   \subsection{Cooling curves}
@@ -379,20 +384,20 @@ The prior was defined
   %     \item{To highlight the impact an inappropriate conversion has, one can observe the difference in retrievals for different radii in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}.}
   % \end{itemize}
 
-  A source of systematic error in exoplanetary characterisation might arise from the inconsistent use of Jupiter's reference radius. Observations typically report planetary radii scaled to the volumetric mean radius of Jupiter ($R_{J, \text{mean}} = 10.97\, R_{\oplus}$). Meanwhile, thermal evolution and interior characterisation tools, such as \texttt{GASTLI}, scale according to Juipter's equatorial radius ($R_{J, \text{eq}} = 11.20\, R_{\oplus}$) \citep{acuna_gastli_2024}. 
-  % \skipline
-
-  To ensure a self-consistent analysis for our retrieval framework, a correction factor $k_J = R_{J, \text{eq}} / R_{J, \text{mean}} \approx 1.021$ must be applied to the observed radii. Failure to account for this discrepancy leads to a systematic bias in the inferred bulk properties.  
-  % 0.02 change in radius, leads to 0.05 change in bulk metallicity -> TODO: decide if this information should be included!
-  To quantify this effect, we compared two retrievals for the planet K2-114 b:
-  % \begin{enumerate}
+  % A source of systematic error in exoplanetary characterisation might arise from the inconsistent use of Jupiter's reference radius. Observations typically report planetary radii scaled to the volumetric mean radius of Jupiter ($R_{J, \text{mean}} = 10.97\, R_{\oplus}$). Meanwhile, thermal evolution and interior characterisation tools, such as \texttt{GASTLI}, scale according to Juipter's equatorial radius ($R_{J, \text{eq}} = 11.20\, R_{\oplus}$) \citep{acuna_gastli_2024}. 
+  
+  
+  % must be applied to the observed radii. Failure to account for this discrepancy leads to a systematic bias in the inferred bulk properties.  
+  % % 0.02 change in radius, leads to 0.05 change in bulk metallicity -> TODO: decide if this information should be included!
+  % To quantify this effect, we compared two retrievals for the planet K2-114 b:
+  % % \begin{enumerate}
+  % %     \item{\textbf{Uncorrected:} Observations are used directly without accounting for the $R_{J, \text{mean}}$ to $R_{J, \text{eq}}$ offset.}
+  % %     \item{\textbf{Corrected:} Observations are scaled by $k_J$ to match the \texttt{GASTLI} framework.}
+  % % \end{enumerate}
+  % \begin{itemize}
   %     \item{\textbf{Uncorrected:} Observations are used directly without accounting for the $R_{J, \text{mean}}$ to $R_{J, \text{eq}}$ offset.}
   %     \item{\textbf{Corrected:} Observations are scaled by $k_J$ to match the \texttt{GASTLI} framework.}
-  % \end{enumerate}
-  \begin{itemize}
-      \item{\textbf{Uncorrected:} Observations are used directly without accounting for the $R_{J, \text{mean}}$ to $R_{J, \text{eq}}$ offset.}
-      \item{\textbf{Corrected:} Observations are scaled by $k_J$ to match the \texttt{GASTLI} framework.}
-  \end{itemize}
+  % \end{itemize}
 
 
   % \begin{figure}[!h]
@@ -409,14 +414,14 @@ The prior was defined
   %     \label{fig:3.3_corner_plot_comparison_internship}
   % \end{figure}
 
-  \begin{figure}[!h]
-      \centering
+  % \begin{figure}[!h]
+  %     \centering
       % \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay.pdf}
-      \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay_new.pdf}
-      % \caption{Posterior distributions for the radius $R_p$ and bulk metallicity $Z_p$       of K2-114 b. The gray contours represent the retrieval without radius correction ($R_p = 0.93^{+0.03}_{-0.03}\, R_J$), while the red contours represent the consistent retrieval scaled by $k_J$ (($R_p = 0.95^{+0.03}_{-0.03}\, R_J$). The shift towards a lower $Z_p$ in the corrected case demonstrates the impact of the radius value on inferred composition. % Thesis results are in gray, while the internship ones are in red. Thesis: $R_p = 0.93^{+0.03}_{-0.03}\, R_J$, $Z_p = 0.30^{+0.07}_{-0.07}$. Internship: $R_p = 0.95^{+0.03}_{-0.03}\, R_J$, $Z_p = 0.26^{+0.08}_{-0.08}$.}
-      \caption{TODO}
-      \label{fig:3.3_corner_plot_comparison_overlay}
-  \end{figure}
+      % \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay_new.pdf}
+  %     % \caption{Posterior distributions for the radius $R_p$ and bulk metallicity $Z_p$       of K2-114 b. The gray contours represent the retrieval without radius correction ($R_p = 0.93^{+0.03}_{-0.03}\, R_J$), while the red contours represent the consistent retrieval scaled by $k_J$ (($R_p = 0.95^{+0.03}_{-0.03}\, R_J$). The shift towards a lower $Z_p$ in the corrected case demonstrates the impact of the radius value on inferred composition. % Thesis results are in gray, while the internship ones are in red. Thesis: $R_p = 0.93^{+0.03}_{-0.03}\, R_J$, $Z_p = 0.30^{+0.07}_{-0.07}$. Internship: $R_p = 0.95^{+0.03}_{-0.03}\, R_J$, $Z_p = 0.26^{+0.08}_{-0.08}$.}
+  %     \caption{TODO}
+  %     \label{fig:3.3_corner_plot_comparison_overlay}
+  % \end{figure}
 
     % Thesis: $R_p = 0.93 \pm 0.03\, R_J$, $Z_p = 0.26 \pm 0.08$
     % Internship: $R_p = 0.95 \pm 0.03\, R_J$, $Z_p = 0.26 \pm 0.08$
@@ -425,7 +430,28 @@ The prior was defined
   % Thus, Thesis predicted a higher $Z_p$ for the same planet for which Internship predicts a lower value. This is because Internship assumes a larger planet, thus making it less dense and therefore inferring a lower value for $Z_p$.
 
   % As seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}, the uncorrected case (gray) yields a smaller radius ($R_p = 0.93^{+0.03}_{-0.03}\, R_J$), which increases the inferred planetary density. As a consequence, the retrieval compensates by overestimating the bulk metallicity ($Z_p = 0.30^{+0.07}_{-0.07}$). By applying the correction factor $k_J$ (red), the larger effective radius ($R_p = 0.95^{+0.03}_{-0.03}\, R_J$) leads to lower bulk metallicity estimate ($Z_p = 0.26^{+0.08}_{-0.08}$). This shift highlights the necessity of consistency when coupling interior structure models with observational data. For this work, it was ensured that the correction was applied to analyses done by both \texttt{GASTLI} and \texttt{planetsynth}.
-  
+
+
+  A source of systematic error in exoplanetary characterisation might arise from the inconsistent use of Jupiter's reference radius. Observations typically report planetary radii scaled to the equatorial radius of Jupiter ($R_{J, \text{eq}} = 11.20\, R_{\oplus}$). Meanwhile, some thermal evolution and interior characterisation tools might scale according to the volumetric mean radius of Jupiter ($R_{J, \text{eq}} = 10.97\, R_{\oplus}$). 
+
+  It is essential to for the reference radius to be consistent across observations and analysis frameworks to ensure one has a self-consistent retrieval. The framework within \texttt{GASTLI} already uses $R_{J,\text{eq}}$ for radius conversions. To highlight the impact this choice of radius has, we look at the impact of working with inconsistent radii conversions. For this, we manually scale the radius values by the factor $k_J = R_{J,\text{mean}} / R{J,\text{eq}} \approx 0.98$, leading to a smaller radius than observed. This inconsistency leads to a systematic bias in the inferred bulk properties. To quantify this effect, we compared retrievals on \texttt{GASLTI} for the planet K2-114 b, as seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}.
+
+  \begin{itemize}
+      \item{\textbf{Consistent}: Observations and analysis radii are scaled into Juipter radii with the equatorial radius $R_{J,\text{eq}}$.}
+      \item{\textbf{Inconsistent}: Observations follow $R_{J,\text{eq}}$, whereas the analysis manually rescales radii to use the volumetric mean radius $R_{J,\text{mean}}$.}
+  \end{itemize}
+
+  \begin{figure}[!h]
+      \centering
+      % \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay.pdf}
+      \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay_new.pdf}
+      \caption{Posterior distributions for the radius $R_p$ and bulk metallicity $Z_p$ of K2-114 b with observed radius $R_{p,\text{obs}} = 0.93^{+0.03}_{-0.03}\, R_J$, following the equatorial radius. Vertical lines represent in the first plot represent the ``true'' radius value $R_p$ used for the analysis. The red contours represent the consistent retrieval which also utilises the equatorial radius: $R_p = R_{p,\text{obs}}$. The gray contours represent the inconsistent retrieval which scales according to the volumetric mean radius: $R_p <  R_{p,\text{obs}}$. The shift towards a lower $Z_p$ in the inconsistent case demonstrates the impact of the radius value on inferred composition.}
+      % \caption{TODO}
+      \label{fig:3.3_corner_plot_comparison_overlay}
+  \end{figure}
+
+  As seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}, both cases assume different values for the ``true'' radius based on the reference Jupiter radius used. In the consistent case, the true radius already matches the observed value ($R_{p,\text{obs}} = 0.93^{+0.03}_{-0.03}\, R_J$) and yields an inferred bulk metallicity of $Z_p = 0.31^{+0.08}_{-0.08}$. However, in the inconsistent case the true radius is smaller than the observed value ($R_{p,\text{obs}} = 0.91^{+0.03}_{-0.03}\, R_J$). The MCMC sampler is forced to predict a higher radius in order to match the observation, yielding a lower inferred bulk metallicity of $Z_p = 0.26^{+0.08}_{-0.08}$. Thus, the price for overestimating radii to match observation is paid by having to underestimate the inferred bulk metallicity.
+  %concrete numbers: 0.02 R_J increase in radius leads to 0.05 decrease in Zp -> mention? if yes, how do we justify this?
 
 % % \clearpage
 %   \begin{figure}[!h]
