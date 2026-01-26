@@ -152,7 +152,7 @@ In this work, we focus on the H/He species and note that \texttt{GASTLI} uses th
 The results of thermal evolution sequences used to generate a grid with dimensions of core mass fraction $\text{CMF}$, mass $M_p\: [M_J]$, equilibrium temperature $T_{\text{eq}}\: [\si{\kelvin}]$
 % internal temperature $T_{\text{int}}\: [\si{\kelvin}]$. 
 and age $\tau_p\: [\si{\giga\year}]$.
-The remaining results of the thermal evolution sequences were overlayed on this grid and we implemented linear interpolation (\texttt{scipy.interpolate.RegularGridInterpolator}). The envelope metallicity was set constant to solar value $Z_{\text{eq}} = Z_{\odot} = 0.014$ \citep{lodders_abundances_2009, ekstrom_grids_2012}. A grid was also created created with the thermal evolution sequences similar to what was previously described. 
+The remaining results of the thermal evolution sequences were overlayed on this grid and we implemented linear interpolation (\texttt{scipy.interpolate.RegularGridInterpolator}). The envelope metallicity was set constant to solar value $Z_{\text{env}} = Z_{\odot} = 0.014$ \citep{lodders_abundances_2009, ekstrom_grids_2012}. A grid was also created created with the thermal evolution sequences similar to what was previously described. 
 
 % Thermal evolution models were generated using \texttt{GASTLI} from \citep{acuna_gastli_2024}. \texttt{GASTLI} is a thermal evolution tool, that models planets as 2 distinctive regions: the interior (consisting of the core and envelope) and the atmosphere. The tool numerically solves the 1D equations that interior structure and thermal evolution. 
 
@@ -160,7 +160,38 @@ The remaining results of the thermal evolution sequences were overlayed on this 
 
 
 \subsubsection{Tool 2: \texttt{planetsynth}}
-\texttt{planetsynth} \citep{muller_synthetic_2021} is the main tool we used for comparison to \texttt{GASTLI}. This tool also solves planetary equations for interior structures and thermal evolution coupled with a set of EoS. The EoS for H/He was modified to also use CD21, instead of CMS19 \citep{chabrier_new_2019} as in the initial version of the tool. 
+\texttt{planetsynth} \citep{muller_synthetic_2021} is the main tool we used for comparison to \texttt{GASTLI}. This tool also solves planetary equations for interior structures and thermal evolution coupled with a set of EoS. The EoS for H/He was modified to also use CD21, instead of CMS19 \citep{chabrier_new_2019} as in the initial version of the tool. Envelope metallicity was set at $Z_{\text{env}} = 0.012$ and the atmospheric model is a gray one, using opacity from \citep{freedman_gaseous_2014}.
+
+
+\subsubsection{\texttt{CEPAM}}
+\texttt{CEPAM} is another tool used. Reference study is \citep{peerani_how_2025}, which did a similar analysis. \\
+Similarities:
+\begin{itemize}
+    \item{assuming core+envelope structure, EoS for H/He is CMS19+HG23 \citep{chabrier_new_2019, howard_accounting_2023} which is similar to CD21.}
+\end{itemize}
+Differences:
+\begin{itemize}
+    \item{atmospheric model is the non-gray from Parmentier \citep{parmentier_non-grey_2015}}
+    \item{Envelope metallicity is $Z_{\text{env}} = 0$, but atmospheric model makes it similar to solar?}
+    \item{Radius is inconsistent (equatorial for observed vs mean for analysis)}
+\end{itemize}
+
+
+
+\subsubsection{Teske et al. 2019}
+Another reference study T19 \citep{teske_metal-rich_2019}. Analysis is identical to \citep{thorngren_mass-metallicity_2016}, \\
+Similarities
+\begin{itemize}
+    \item{need more info about atmospheric model}
+    \item{is radius scaling is consistent or inconsistent}
+    \item{Analysis is also MCMC}
+\end{itemize}
+Differences
+\begin{itemize}
+    \item{H/He EOS is SvCH \citep{saumon_equation_1995}}
+\end{itemize}
+
+
 
 
 
@@ -254,21 +285,21 @@ The prior was defined
   \end{figure*}
   
   
-\clearpage
-  \subsection{Trends}
-  \begin{figure*}[!h]
-      \centering
-      \includegraphics[width=\hsize]{fig/3.2_trend_comparison.pdf}
-      \caption{Inferred bulk metallicity $Z_p$ as a function of planetary mass for $M_p \in [0.01, 3]\, M_J$. \textit{Top panel}: Scatter points and error bars show inferred values for bulk metallicity. The solid lines are their respective fits constructed using orthogonal distance regression. Shaded areas around these lines are the $1\sigma$ uncertainties of this fit. Results from \texttt{GASTLI} and \texttt{planetsynth} are depicted in orange and blue respectively. \textit{Bottom panel}: Residuals of the inferred bulk metallicity values between the two thermal evolution tools. These are calculated by subtracting the \texttt{planetsynth} values fron the \texttt{GASTLI} values.}
-      \label{fig:3.2_trend_comparison}
-  \end{figure*}
+% \clearpage
+  % \subsection{Trends}
+  % \begin{figure*}[!h]
+  %     \centering
+  %     \includegraphics[width=\hsize]{fig/3.2_trend_comparison.pdf}
+  %     \caption{Inferred bulk metallicity $Z_p$ as a function of planetary mass for $M_p \in [0.01, 3]\, M_J$. \textit{Top panel}: Scatter points and error bars show inferred values for bulk metallicity. The solid lines are their respective fits constructed using orthogonal distance regression. Shaded areas around these lines are the $1\sigma$ uncertainties of this fit. Results from \texttt{GASTLI} and \texttt{planetsynth} are depicted in orange and blue respectively. \textit{Bottom panel}: Residuals of the inferred bulk metallicity values between the two thermal evolution tools. These are calculated by subtracting the \texttt{planetsynth} values fron the \texttt{GASTLI} values. Red points represent planets which had \texttt{planetsynth} predict a higher $Z_p$ than \texttt{GASTLI}.}
+  %     \label{fig:3.2_trend_comparison}
+  % \end{figure*}
 
 
 \clearpage
   \begin{figure*}
       \centering
       \includegraphics[width=\hsize]{fig/3.2_trend_comparison_new.pdf}
-      \caption{TODO}
+      \caption{Inferred bulk metallicity $Z_p$ as a function of planetary mass for $M_p \in [0.01, 3]\, M_J$. \textit{Top panel}: Scatter points and error bars show inferred values for bulk metallicity. The solid lines are their respective fits constructed using orthogonal distance regression. Shaded areas around these lines are the $1\sigma$ uncertainties of this fit. Results from \texttt{GASTLI} and \texttt{planetsynth} are depicted in orange and blue respectively. \textit{Bottom panel}: Residuals of the inferred bulk metallicity values between the two thermal evolution tools. These are calculated by subtracting the \texttt{planetsynth} values from the \texttt{GASTLI} values. Red points represent planets which had \texttt{planetsynth} predict a higher $Z_p$ than \texttt{GASTLI}.}
       \label{fig:3.2_trend_comparison}
   \end{figure*}
   
@@ -453,6 +484,29 @@ The prior was defined
   As seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}, both cases assume different values for the ``true'' radius based on the reference Jupiter radius used. In the consistent case, the true radius already matches the observed value ($R_{p,\text{obs}} = 0.93^{+0.03}_{-0.03}\, R_J$) and yields an inferred bulk metallicity of $Z_p = 0.31^{+0.08}_{-0.08}$. However, in the inconsistent case the true radius is smaller than the observed value ($R_{p,\text{obs}} = 0.91^{+0.03}_{-0.03}\, R_J$). The MCMC sampler is forced to predict a higher radius in order to match the observation, yielding a lower inferred bulk metallicity of $Z_p = 0.26^{+0.08}_{-0.08}$. Thus, the price for overestimating radii to match observation is paid by having to underestimate the inferred bulk metallicity.
   %concrete numbers: 0.02 R_J increase in radius leads to 0.05 decrease in Zp -> mention? if yes, how do we justify this?
 
+  
+\subsection{Talking Points about Differences}
+\subsubsection{Structure}
+\begin{itemize}
+    \item{are all core + envelope? GASTLI, CEPAM and Teske definitely do. I'm guessing so does planetsynth, but confirm}
+    \item{is envelope econvective for all?}
+    \item{what is used to model metals? rocks, water or mixture}
+\end{itemize}
+
+\subsubsection{EOS}
+\begin{itemize}
+    \item{naturally, all have different EOS. at least we tried to get H/He EoS as consistent as possible}
+    \item{but Teske uses SvCH \citep{saumon_equation_1995}}
+    \item{why is H/He so important? all other EoS are different -> rock (modelled by various different materials and thus naturally different EoS), ice (modelled by water, but often with different EoS) and the rock-ice mixture)}
+\end{itemize}
+
+\subsubsection{Analysis method}
+\begin{itemize}
+    \item{GASTLI, planetsynth and T19 all uses MCMC with 10000 steps}
+    \item{CEPAM used root-finding method, essentially limiting itself to 1 obsverational constraint: the radius}
+    \item{Does this have any significant impacts?}
+\end{itemize}
+
 % % \clearpage
 %   \begin{figure}[!h]
 %       \centering
@@ -467,6 +521,8 @@ The prior was defined
 %       \caption{TODO}
 %       \label{fig:3.3_box_plot_comparison_bulk_metallicity}
 %   \end{figure}
+
+
 
 \clearpage
 \section{Figures examples}
