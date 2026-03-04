@@ -280,7 +280,7 @@ TODO:
 
 \clearpage
   % \subsection{Individual Planets}
-  \subsection{Thermal Evolution Tools}
+  \subsection{Posterior Distributions}
   % \begin{figure*}[!t]
   %     \centering
   %     \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_3_datasets_cepam_paper.pdf}
@@ -294,12 +294,45 @@ TODO:
   %     \label{fig:3.1_bulk_metallicity_comparison_4_datasets}
   % \end{figure*}
 
-  \begin{figure*}
+  The inference of bulk metallicities of giant planets is sensitive to the assumptions of the thermal evolution tools used. Fig.~\ref{fig:3.1_bulk_metallicity_comparison_TE_tools} illustrates the posterior distributions for six representative gas giants that are available in our catalogue, as well as those that have been investigated in the aforementioned studies.
+
+  \begin{figure*}[!t]
       \centering
       \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_4_datasets_cepam_teske_new_fill.pdf}
-      \caption{TODO}
+      \caption{Posterior distributions of inferred bulk metallicities $Z_p$ of six planets from the catalogue. The distributions representing results from \texttt{GASTLI} (orange) and \texttt{planetsynth} (blue) are obtained following a standard MCMC procedure, initialised with 10000 draws per planet. The raw results were used, leading to skewed distributions. Results from T19 (green)followed the same analysis method. However, since raw data was not available, the results from the study were assumed to follow a normal distribution. Results from \texttt{CEPAM} (red) followed a root-finding method and only used 5000 initial draws per planet. They were also assumed to follow a normal distribution, as the raw data was not available.}
       \label{fig:3.1_bulk_metallicity_comparison_TE_tools}
   \end{figure*}
+
+  % \subsubsection{Distribution Morphology}
+  A primary observation in Fig.~\ref{fig:3.1_bulk_metallicity_comparison_TE_tools} is the difference in the morphologies of the posterior distributions. Results of \texttt{GASTLI} and \texttt{planetsynth} exhibit skewed, non-Gaussian distributions. This skewness is a byproduct of the MCMC procedure of 10000 intial draws, which captures the physical non-linearities of the interior structures. On the other hand, those from \texttt{CEPAM} and T19 appear as symmetric normal distributions despite following similar sampling procedures (10000 and 5000 initial draws, respectively). This is because the raw data from the studies was unavailable, and thus symmetric errors were assumed for these distributions.
+
+  % \subsubsection{Impact of Atmospheric Models and EoS}
+  For the individual planets, the primary observation is the systematic shifts of the peak of bulk metallicity $Z_p$ between tools. While the EoS for rocks and water, which represent metals, were different, the EoS for H/He were very similar. Consistent H/He EoS across thermal evolution models lead to a more consistent $Z_p$ prediction. So, while the EoS for H/He might have slight differences, they are not the primary cause for the shifts in peaks. This can be attributed to the atmospheric models used in each thermal evolution tool. These are indeed very different from each, and the transition from a radiative atmosphere to convective interior significantly impacts how the planet would have evolved. This also includes how the envelope is treated, and if it is assumed to homogeneous, what value is assigned to $Z_{\text{env}}$. These differences across thermal evolution models are highlighted in Tab.~\ref{tab:EoS_and_atm_model}.
+
+\begin{table}[]
+    \begin{tabular}{llll}
+    \hline
+    \hline
+    Tool                 & H/He EoS      & $Z_{\text{env}}$ & Atmospheric Model        \\
+    \hline
+    \texttt{GASTLI}      & CD21          & 0.014            & \texttt{petitCODE} \\
+    \texttt{planetsynth} & CD21          & 0.012            & Freedman? (grey)                   \\
+    \texttt{CEPAM}       & CMS19 + HG23* & 0*               & Parmentier*                \\
+    T19                  & ScVH (T16)    & ?                & Fortney?                  \\
+    \hline
+    \end{tabular}
+    \caption{}
+\label{tab:EoS_and_atm_model}
+\end{table}
+
+ 
+
+
+  
+
+  
+
+\
   
 % \clearpage
   % \subsection{Trends}
@@ -312,6 +345,7 @@ TODO:
 
 
 \clearpage
+\subsection{Trends in Bulk Metallicity}
   \begin{figure*}
       \centering
       \includegraphics[width=\hsize]{fig/3.2_trend_comparison_new.pdf}
@@ -319,8 +353,8 @@ TODO:
       \label{fig:3.2_trend_comparison}
   \end{figure*}
   
-\clearpage
-  \subsection{Cooling curves}
+% \clearpage
+%   \subsection{Cooling curves}
 
 
 
