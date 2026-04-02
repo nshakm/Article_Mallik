@@ -102,7 +102,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-The bulk composition of giant planets is regarded as a fingerprint of their formation and evolutionary pathways. According to the core accretion model, the distribution of heavy-element mass $M_Z$ within a gas giant is determined by the efficiency of solid accretion and timing of gas envelope acquisition \citep{pollack_formation_19960}{\bf recent refs}. Establishing a robust mass-metallicity relation is essential for distinguishing between different formation pathways in order to understand the diversity of exoplanet populations.
+The bulk composition of giant planets is regarded as a fingerprint of their formation and evolutionary pathways. According to the core accretion model, the distribution of heavy-element mass $M_Z$ within a gas giant is determined by the efficiency of solid accretion and timing of gas envelope acquisition \citep{pollack_formation_1996}{\bf recent refs}. Establishing a robust mass-metallicity relation is essential for distinguishing between different formation pathways in order to understand the diversity of exoplanet populations.
 
 Space-based transit missions (e.g. Kepler, K2, TESS), combined with ground-based radial velocity follow-ups provided  a large and diverse population of  exoplanets with accurately measured masses $M_p$ and radii $R_p$. This allows us to infer the planetary bulk composition and internal structure  \citep{seager_mass-radius_2007, spiegel_structure_2014, jontof-hutter_compositional_2019, muller_towards_2023}.
 % Our planet catalogue contains planets with equilibrium temperatures $T_{\text{eq}} \leq 1000\: \si{\kelvin}$. These are not strongly inflated, making the characterisation of their interiors feasible and reliable \citep{muller_bulk_2025}.
@@ -117,7 +117,8 @@ When different studies report different metallicity values for the same planet, 
 In this work, we perform a controlled comparison of four independent interior modelling tools. Rather than only focusing on the specific value of $Z_p$ of individual planets, we quantify the systematic shifts caused by the use of different models and their assumptions.  %We investigate the robustness of population-level trends. By applying these four tools to a consistent sample of giant planets, 
 We next test whether the mass-metallicity relation remains consistent across different model assumptions, numerical tools and statistical frameworks. 
 %This would determine what the trend truly reveals about the astrophysical nature of giant planets.
-{\bf Our paper is organised as follows...}
+
+Our paper is organised as follows. In Section 2, we describe the planetary sample and the four interior modelling tools used in this comparison. Section 3 presents our results, focusing on the systematic shifts in the bulk metallicity and robustness of the mass-metallicity relation across different model assumptions. We discuss tthe the physical implications of these discrepancies in Section 4. Finally, our conclusions and outlook for future population studies are summarised in Section 5.
 % \subsection{Structure}
 % necessary?
 
@@ -130,17 +131,17 @@ We next test whether the mass-metallicity relation remains consistent across dif
 The planetary sample used in this work was taken from the PlanetS catalogue \citep{parc_super-earths_2024} {\bf you need to put the date since it is changing with time..}. We only considered ``warm Jupiters", i.e., planets with masses between $0.1$ and $3\ M_J$ and equilibrium temperatures of $T_{\text{eq}} \le 1000\: \si{\kelvin}$ since these planets are not inflated. The sample is extended by three recently detected planets around M-dwarfs: TOI-762 A b \citep{hartman_toi_2024}, TOI-5176 A b and TOI-6034 b \citep[priv. comm. Shubham Kanodia;][]{muller_bulk_2025}, leading to a total sample size of 80 exoplanets.
 
 \subsection{Thermal Evolution Tools}
-The main attributes of the analyses are listed in Tab.~\ref{tab:EoS_and_atm_model}.
+% The main attributes of the analyses are listed in Tab.~\ref{tab:EoS_and_atm_model}.
 
-{\bf 
-\begin{itemize}
-    \item{Talk about how we worked with GASTLI}
-    \item{Comparison of results from GASTLI was done for the exact same planets on planetsynth (total 80)}
-    \item{Both results are also compared to a study that used CEPAM on a small subset of that same catalogue (total 32)}
-    \item{Another study was used for comparison, this one is observational? (total 6)}
-    \item{If only compared to observational study, then (total 14)}
-\end{itemize}
-}
+% {\bf 
+% \begin{itemize}
+%     % \item{Talk about how we worked with GASTLI}
+%     % \item{Comparison of results from GASTLI was done for the exact same planets on planetsynth (total 80)}
+%     \item{Both results are also compared to a study that used CEPAM on a small subset of that same catalogue (total 32)}
+%     \item{Another study was used for comparison, this one is observational? (total 6)}
+%     \item{If only compared to observational study, then (total 14)}
+% \end{itemize}
+% }
 
  
 \subsubsection{Model 1: \texttt{GASTLI}}
@@ -175,10 +176,13 @@ For the inference of $Z_p$, a root-finding method was employed. 5000 draws of th
 \subsubsection{Reference 2: T19}
 Another reference study is T19 \citep{teske_metal-rich_2019}. Both thermal evolution and inference methods follow the same exact procedure as in T16 \citep{thorngren_mass-metallicity_2016}. For this, a private thermal evolution tool is used which is not publicly available. For the evolution, the SvCH \citep{saumon_equation_1995} EoS for H/He is applied. 
 
-NOTE: i am unsure what the assigned envelope metallicity is and what kind of atmospheric model the Fortney model is. 
-
+\textbf{NOTE: i am unsure what the assigned envelope metallicity is and what kind of atmospheric model the Fortney model is. 
+}
 As mentioned, the inference method is the exact same as in T16. This is similar to our methods used for results from \texttt{GASTLI} and \texttt{planetsynth}.
+\medskip
+% \break
 
+To ensure a fair comparison, we focus on a core sample of 6 planets that are common in all four planet catalogues. Note that the complete catalogues for P25 and T19 contain 43 and 33 exoplanets respectively. All above-mentioned information is also summarised in Tab.~\ref{tab:EoS_and_atm_model}.
 
 \input{tables/studies_and_parameters}
 
@@ -193,8 +197,8 @@ The inference of bulk metallicities of giant planets is sensitive to the assumpt
 \begin{figure*}[!t]
   \centering
   \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_4_datasets_cepam_teske_new_fill.pdf}
-  \caption{Posterior distributions of inferred bulk metallicities $Z_p$ of six planets from the catalogue. The distributions representing results from \texttt{GASTLI} (orange) and \texttt{planetsynth} (blue) are obtained following a standard MCMC procedure, initialised with 10000 draws per planet. The raw results were used, leading to skewed distributions. Results from T19 (green)followed the same analysis method. However, since raw data was not available, the results from the study were assumed to follow a normal distribution. Results from P25 (red) followed a root-finding method and only used 5000 initial draws per planet. They were also assumed to follow a normal distribution, as the raw data was not available.}
-  \label{fig:3.1_bulk_metallicity_comparison_TE_tools}
+  \caption{Posterior distributions of inferred bulk metallicities $Z_p$ of six planets from the catalogue. The distributions representing results from \texttt{GASTLI} (orange) and \texttt{planetsynth} (blue) are obtained following a standard MCMC procedure, initialised with 10000 draws per planet. The raw results were used, leading to skewed distributions. Results from T19 (green) followed the same analysis method. However, since raw data was not available, the results from the study were assumed to follow a normal distribution. Results from P25 (red) followed a root-finding method and only used 5000 initial draws per planet. They were also assumed to follow a normal distribution, as the raw data was not available. Values in the lower legend denote the heavy-elemetn mass $M_Z$ calculated from the global mode of the posterior distributions $Z_p$.}
+  \label{fig:3.1_bulk_metallicity_comparison_TE_tools} 
 \end{figure*}
 
 A primary observation in Fig.~\ref{fig:3.1_bulk_metallicity_comparison_TE_tools} is the difference in the morphologies of the posterior distributions. Results of \texttt{GASTLI} and \texttt{planetsynth} exhibit skewed, non-Gaussian distributions. This skewness is a byproduct of the MCMC procedure of 10000 intial draws, which captures the physical non-linearities of the interior structures. On the other hand, those from P25 and T19 appear as symmetric normal distributions despite following similar sampling procedures (10000 and 5000 initial draws, respectively). This is because the raw data from the studies was unavailable, and thus symmetric errors were assumed for these distributions.
@@ -241,6 +245,8 @@ It is essential for the reference radius to be consistent across observations an
 As seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}, both cases assume different values for the ``true'' radius based on the reference Jupiter radius used. In the consistent case, the true radius already matches the observed value ($R_{p,\text{obs}} = 0.93^{+0.03}_{-0.03}\, R_J$) and yields an inferred bulk metallicity of $Z_p = 0.31^{+0.08}_{-0.08}$. However, in the inconsistent case the true radius is smaller than the observed value ($R_{p,\text{obs}} = 0.91^{+0.03}_{-0.03}\, R_J$). The MCMC sampler is forced to predict a higher radius in order to match the observation, yielding a lower inferred bulk metallicity of $Z_p = 0.26^{+0.08}_{-0.08}$. Thus, the price for overestimating radii to match observation is paid by having to underestimate the inferred bulk metallicity.
  %concrete numbers: 0.02 R_J increase in radius leads to 0.05 decrease in Zp -> mention? if yes, how do we justify this?
 
+\textbf{TODO: mention that P25 used inconsistent scaling? if yes, talk about how this inconsistent scaling affects root-finding functions the same way it does for MCMC sampling methods}
+
 
 % \clearpage
 \subsection{Talking Points about Differences}
@@ -280,7 +286,7 @@ We compared the inferred bulk metallicities of gas giants using \texttt{GASTLI} 
     \item{The choice of inference between MCMC sampling and root-finding methods also affects the results. The method of root-finding  is limited to one observational constraint only. MCMC sampling, on the other hand, uses multiple observational constraints allowing  for a more extended exploration of the parameter space.}
     \item{Despite the shifts in individual estimates of the planetary bulk metallicity, the inferred trend of the decreasing mass-metallicity relation is robust.}
     %This confirms that population-level insights are robust to variations across models.}
-    \item{TODO: radius scaling and its impact}
+    \item{Systematic biases can arise from inconsistent planetary radius scaling. The discrepancy between using Jupiter's equatorial versus volumetric mean radius as a reference can introduce a shift in the input radius. As demonstrated with K2-114 b, this inconsistency forces the model to compensate for the radius difference by underestimating the bulk metallicity by shifting the inferred composition $Z_p$ as much as 0.05.}
 \end{itemize}
 %Currently, the community tends to overlook the significance of the theoretical uncertainties. As a community, we could either move towards a more standardised approach , or simply put more emphasis on these uncertainties and include them in discussions in more detail. It might also be interesting to replicate this study for different types of interior structures, that are not limited to the simple core+envelope model. 
 % Additionally, facilities such as JWST might increase observational precision. As this would help refine internal boundary conditions and 
