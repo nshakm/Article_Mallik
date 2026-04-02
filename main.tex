@@ -22,6 +22,8 @@
 \usepackage{siunitx}
 % \usepackage{biblatex}
 % \addbibresource{references.bib}
+\usepackage{adjustbox}
+
 \usepackage{booktabs}
 \usepackage{subcaption}         % necessary for continued figures, example in section 3
                                 % and appendix
@@ -44,8 +46,9 @@
 \begin{document}
 
    % \title{Astronomy \& Astrophysics \LaTeX\ template}
-   \title{Understanding Giant Planet Properties Across Stellar Environments}
-
+   % \title{Understanding Giant Planet Properties Across Stellar Environments}
+   %\title{Investigating the Significance and Impacts of Theoretical Uncertainties on Giant Planet Bulk Properties}
+ \title{The Impact of Theoretical Models on Our Understanding of Giant Exoplanets}
    % \subtitle{Subtitle}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,21 +81,20 @@
   \abstract
   % context heading (optional)
   % {} leave it empty if necessary  
-   {Optional, leave empty if necessary.  The heading “Context” is used when needed to
-give background information on the research conducted in the paper}
+   {The characterisation of of giant exoplanet compositions relies heavily on thermal evolution models. However, the sensitivity of inferred bulk metallicities to different modelling frameworks is poorly quantified, often leading to significant differences in the planetary characterisation. }
   % aims heading (mandatory)
-   {Mandatory. The objectives of the paper are defined here.} 
+   {We aim to evaluate how differences in theoretical models, specifically the treatment of the atmosphere, the used equations of state, and statistical inference, impact the planetary characterisation and the inferred  population-wide metallicity trends.} 
   % methods heading (mandatory)
-   {Mandatory. The methods of the investigation are outlined here}
+  % {We computed the bulk metallicities $Z_p$ of a sample of 80 gas giants ($0.1-3\ M_J$), using the  \texttt{GASTLI} and \texttt{planetsynth} simulations with a standard MCMC sampling procedure and compare the results. We next compare these results to previous studies:  P25 {\bf what is this?} (using \texttt{CEPAM} with a root-finding method) and T19 {\bf what is this?}  (using a private tool with MCMC sampling). We analysed the variations in their underlying assumptions, including H/He EoS (CD21, CMS19+HG23, ScVH) and  atmospheric models (\texttt{petitCODE}, Freedman, Parmentier and Fortney models).}
+   {We computed the bulk metallicities $Z_p$ of a sample of 80 gas giants ($0.1-3\ M_J$), using the  \texttt{GASTLI} and \texttt{planetsynth} simulations with a standard MCMC sampling procedure and compare the results. We next compare these results to previous studies which use other thermal evolution tools (e.g., \texttt{CEPAM}) and other also inference methods (e.g., root-finding algorithms). We analysed the variations in their underlying assumptions, including H/He EoS (CD21, CMS19+HG23, ScVH) and  atmospheric models (\texttt{petitCODE}, Freedman, Parmentier and Fortney models).}
   % results heading (mandatory)
-   {Mandatory. The results are summarized here.}
+   {We find systematic shifts in the absolute $Z_p$ estimates across models, primary driven by differences in atmospheric models and the treatment of the atmosphere-interior boundary. However, despite these offsets, the different models reconstruct a consistent negative correlation between planetary mass and bulk metallicity.}
   % conclusions heading (optional), leave it empty if necessary
-   {Optional, leave empty if necessary.  “Conclusions” can be used to
-explicit the general conclusions that can be drawn from the paper.}
+   {Theoretical uncertainties introduce significant systematic shifts in the characterisation of individual planets. However,  population-wide insights, especially the mass-metallicity relation, are robust to model variations. We recommend that these theoretical uncertainties should be considered when interpreting ongoing and future exoplanetary data.}
 
    \keywords{giant planet formation --
-                $\kappa$-mechanism --
-                stability of gas spheres
+                bulk composition --
+                mass-metallicity trend
                }
 
    \maketitle
@@ -100,40 +102,37 @@ explicit the general conclusions that can be drawn from the paper.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-% \lipsum[1]
-TODO:
-\textbf{WEDNESDAY, 04 MARCH}
-\begin{itemize}
-    \item{context for paper}
-    \item{Structure of paper}
-\end{itemize}
+The bulk composition of giant planets is regarded as a fingerprint of their formation and evolutionary pathways. According to the core accretion model, the distribution of heavy-element mass $M_Z$ within a gas giant is determined by the efficiency of solid accretion and timing of gas envelope acquisition \citep{pollack_formation_19960}{\bf recent refs}. Establishing a robust mass-metallicity relation is essential for distinguishing between different formation pathways in order to understand the diversity of exoplanet populations.
+
+Space-based transit missions (e.g. Kepler, K2, TESS), combined with ground-based radial velocity follow-ups provided  a large and diverse population of  exoplanets with accurately measured masses $M_p$ and radii $R_p$. This allows us to infer the planetary bulk composition and internal structure  \citep{seager_mass-radius_2007, spiegel_structure_2014, jontof-hutter_compositional_2019, muller_towards_2023}.
+% Our planet catalogue contains planets with equilibrium temperatures $T_{\text{eq}} \leq 1000\: \si{\kelvin}$. These are not strongly inflated, making the characterisation of their interiors feasible and reliable \citep{muller_bulk_2025}.
+%Despite the abundance of data however, there is still a lack of uniformity in modelling efforts. 
+
+The inferred planetary composition, however, depends on the assumed physics, especially the used Equations of State (EoS) for hydrogen and helium, as well as the atmospheric boundary conditions and opacities. Furthermore, the statistical sampling methods can also affect the inferred bulk metallicity $Z_p$.
+
+{\bf FIX: Diversity in computational tools leads to problem of results being dependent on the models assumed. 
+
+When different studies report different metallicity values for the same planet, it becomes difficult to determine whether this discrepancy arises from the planet's unique history or simply from the underlying assumptions of the modelling tool being used. Previous studies (e.g., \citep{thorngren_mass-metallicity_2016, teske_metal-rich_2019, howard_evolution_2024, muller_bulk_2025, peerani_how_2025} have established general trends, but due to the different assumptions, a direct comparison remains difficult.}
+
+In this work, we perform a controlled comparison of four independent interior modelling tools. Rather than only focusing on the specific value of $Z_p$ of individual planets, we quantify the systematic shifts caused by the use of different models and their assumptions.  %We investigate the robustness of population-level trends. By applying these four tools to a consistent sample of giant planets, 
+We next test whether the mass-metallicity relation remains consistent across different model assumptions, numerical tools and statistical frameworks. 
+%This would determine what the trend truly reveals about the astrophysical nature of giant planets.
+{\bf Our paper is organised as follows...}
+% \subsection{Structure}
+% necessary?
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{Citations and maths examples}
+% \clearpage
 \section{Methods}
 
-
 \subsection{Planet Catalogue}
+The planetary sample used in this work was taken from the PlanetS catalogue \citep{parc_super-earths_2024} {\bf you need to put the date since it is changing with time..}. We only considered ``warm Jupiters", i.e., planets with masses between $0.1$ and $3\ M_J$ and equilibrium temperatures of $T_{\text{eq}} \le 1000\: \si{\kelvin}$ since these planets are not inflated. The sample is extended by three recently detected planets around M-dwarfs: TOI-762 A b \citep{hartman_toi_2024}, TOI-5176 A b and TOI-6034 b \citep[priv. comm. Shubham Kanodia;][]{muller_bulk_2025}, leading to a total sample size of 80 exoplanets.
 
-The sample of planets used for this work is from the PlanetS catalogue \citep{parc_super-earths_2024}, which itself is based on the NASA Exoplanet Archive. The focus was on planets with masses between 0.1 and 3 $M_J$ and equilibrium temperatures of $T_{\text{eq}} \le 1000\: \si{\kelvin}$. Characterisation of their interiors is more feasible as these planets are not strongly inflated. The sample is extended by three recently detected planets around M-dwarfs: TOI-762 A b \citep{hartman_toi_2024}, TOI-5176 A b and TOI-6034 b \citep[priv. comm. Shubham Kanodia;][]{muller_bulk_2025}, leading to a total sample size of 80 exoplanets.
-% The sample can also be split into two sets: planets around FGK stars and planets around M-dwarfs, which have an effective temperature of $T_{\text{eff}} \le 3900\: \si{\kelvin}$.
-% TODO: planet catalogue for P25 ? \\
-% TODO: planet catalogue for T19 ?
-
-% \cite{hartman_toi_2024}
-% 132) TOI-762 A b
-% % 117) TIC 46432937 b (named as TIC 6432937 b on database) -> not calculated (too heavy)
-
-% \cite[Shubham Kanodia]{muller_bulk_2025}
-% % 131) TOI-6383 b -> not calculated (missing age)
-% 124) TOI-5176 A b
-% 130) TOI-6034 b
-
-
-% \subsection{Model Parameters}
 \subsection{Thermal Evolution Tools}
-\textbf{TUESDAY, 03 MARCH }
-TODO: Intro text about different thermal evolution tools
+The main attributes of the analyses are listed in Tab.~\ref{tab:EoS_and_atm_model}.
+
+{\bf 
 \begin{itemize}
     \item{Talk about how we worked with GASTLI}
     \item{Comparison of results from GASTLI was done for the exact same planets on planetsynth (total 80)}
@@ -141,885 +140,165 @@ TODO: Intro text about different thermal evolution tools
     \item{Another study was used for comparison, this one is observational? (total 6)}
     \item{If only compared to observational study, then (total 14)}
 \end{itemize}
+}
 
  
-\subsubsection{Tool 1: \texttt{GASTLI}}
+\subsubsection{Model 1: \texttt{GASTLI}}
+The \texttt{GASTLI} code \citep{acuna_gastli_2024} was used for the thermal evolution of planets. This code numerically solves the 1D equations that describe the interior structure and thermal evolution equations, coupled to equations of state (EoS). The interior consists of two distinct regions: a core surrounded by a gaseous envelope. The atmosphere is defined as the region above the boundary of the interior at $P_{\text{surf}} = 1000\: \si{\bar}$. 
 
-% TODO: describe this study and that is uses GASTLI + what it is + its parameters (EoS) \\
-\texttt{GASTLI} \citep{acuna_gastli_2024} was used for the thermal evolution of planets. It numerically solves the 1D equations that describe the interior structure and thermal evolution equations, coupled to equations of state (EoS). The interior consists of 2 distinct regions, following the core and envelope model. The atmosphere is defined as the region above the boundary of the interior at $P_{\text{surf}} = 1000\: \si{\bar}$. 
-
-Previous studies, such as \cite{howard_giant_2025}, have shown how the choice of EoS has a significant impact on thermal evolution and the inference of planetary properties. 
+Previous studies, such as \cite{howard_giant_2025} investigated  how the choice of the EoS affect the thermal evolution and the inference of planetary properties. 
 % \texttt{GASTLI} uses the following EoS: SESAME \citep{lyon_sesame_1992} for silicate in the core, CD21 \citep{chabrier_new_2021} for H/He in the envelope, M19 \citep{mazevet_ab_2019} \& AQUA \citep{haldemann_aqua_2020} for pure water in the envelope and atmosphere.
-In this work, we focus on the H/He species and note that \texttt{GASTLI} uses the CD21 EoS \citep{chabrier_new_2021} for hydrogen and helium in the envelope. The atmospheric model is petitCODE \citep{molliere_model_2015}.
+In this work, we focus on the H/He species and note that \texttt{GASTLI} uses the CD21 EoS \citep{chabrier_new_2021} for hydrogen and helium in the envelope. The atmospheric model is \texttt{petitCODE} \citep{molliere_model_2015}.
 
 The results of thermal evolution sequences used to generate a grid with dimensions of core mass fraction $\text{CMF}$, mass $M_p\: [M_J]$, equilibrium temperature $T_{\text{eq}}\: [\si{\kelvin}]$
 % internal temperature $T_{\text{int}}\: [\si{\kelvin}]$. 
 and age $\tau_p\: [\si{\giga\year}]$.
-The remaining results of the thermal evolution sequences were overlayed on this grid and we implemented linear interpolation (\texttt{scipy.interpolate.RegularGridInterpolator}). The envelope metallicity was set constant to solar value $Z_{\text{env}} = Z_{\odot} = 0.014$ \citep{lodders_abundances_2009, ekstrom_grids_2012}. A grid was also created created with the thermal evolution sequences similar to what was previously described. 
+The remaining results of the thermal evolution sequences were overlayed on this grid and we implemented linear interpolation (\texttt{scipy.interpolate.RegularGridInterpolator}). The envelope metallicity was set constant to solar value $Z_{\text{env}} = Z_{\odot} = 0.014$ \citep{lodders_abundances_2009, ekstrom_grids_2012}. A grid was also created with the thermal evolution sequences similar to what was previously described. 
 
-% Thermal evolution models were generated using \texttt{GASTLI} from \citep{acuna_gastli_2024}. \texttt{GASTLI} is a thermal evolution tool, that models planets as 2 distinctive regions: the interior (consisting of the core and envelope) and the atmosphere. The tool numerically solves the 1D equations that interior structure and thermal evolution. 
-
-% Outputs of the thermal evolution models include planetary radius $R_{\text{out}}$, mass $M_{\text{out}}$ and age $\tau_{\text{out}}$. These models were also used to construct a grid defined by the axes: core mass fraction $\text{CMF}$, envelope metallicity $Z_{\text{env}}$ (set to the solar value $Z_{\text{env}} = Z_{\odot} = 0.014$ for this work), planetary mass $M$, equilibrium temperature $T_{\text{eq}}$ and internal temperature $T_{\text{int}}$. Predictions for the radius $R_{\text{pred}}$, mass $M_{\text{pred}}$ and age $\tau_{\text{pred}}$ were obtained by interpolating along this discrete grid using Piecewise Cubic Hermite Interpolating Polynomials (PCHIP) from the Python package \texttt{SciPy}.
-
-
-\subsubsection{Tool 2: \texttt{planetsynth}}
-\texttt{planetsynth} \citep{muller_synthetic_2021} is the main tool we used for comparison to \texttt{GASTLI}. This tool also solves planetary equations for interior structures and thermal evolution coupled with a set of EoS. The EoS for H/He was modified to also use CD21, instead of CMS19 \citep{chabrier_new_2019} as in the initial version of the tool. Envelope metallicity was set at $Z_{\text{env}} = 0.012$ and the atmospheric model is a gray one, using opacity from \citep{freedman_gaseous_2014}.
+For the inference of bulk metallicity $Z_p$, the standard Markov Chain Monte Carlo (MCMC) approach was employed, similarly to \cite{muller_bulk_2025}. Mass $M_p$, core mass fraction ($\text{CMF}$) and age $\tau_p$ were the planetary parameters drawn by sampling prior distributions from observations.
+% \textbf{Mass, radius and age were the planetary parameters drawn by sampling prior distributions from observations.}
+The mass was sampled from normal distribution based on observations, $\text{CMF}$ sampled from a uniform distribution bounded between $0.01$ and $0.9$ and age was sampled from a uniform distribution between the minimum and maximum observed stellar age. The lowest possible age was limited to $1\: \si{\giga\year}$, while the upper age limit was set to $13.6\: \si{\giga\year}$, the age of the Milky Way. Thus, for each planet there is a unique parameter sample space. On each of these, an ensemble of 32 walkers were evolved for 10000 draws in order to obtain posterior distribution for $\text{CMF}$. Using this, we obtained distributions for bulk metallicity using $Z_p = \text{CMF} + Z_{\text{env}}(1-\text{CMF})$.
 
 
-\subsubsection{\texttt{CEPAM}}
-\texttt{CEPAM} is another tool used. Reference study is \citep{peerani_how_2025}, which did a similar analysis. \\
-Similarities:
-\begin{itemize}
-    \item{assuming core+envelope structure, EoS for H/He is CMS19+HG23 \citep{chabrier_new_2019, howard_accounting_2023} which is similar to CD21.}
-\end{itemize}
-Differences:
-\begin{itemize}
-    \item{atmospheric model is the non-gray from Parmentier \citep{parmentier_non-grey_2015}}
-    \item{Envelope metallicity is $Z_{\text{env}} = 0$, but atmospheric model makes it similar to solar?}
-    \item{Radius is inconsistent (equatorial for observed vs mean for analysis)}
-\end{itemize}
+\subsubsection{Model 2: \texttt{planetsynth}}
+ The second model we considered is \texttt{planetsynth}  \citep{muller_synthetic_2021}. This model also solves planetary equations for interior structures and thermal evolution coupled with a set of EoS. The EoS for H/He was modified to also use CD21, instead of CMS19 \citep{chabrier_new_2019} as in the initial version of the tool. Envelope metallicity was set at $Z_{\text{env}} = 0.012$ and with a grey atmosphere using opacities from \citep{freedman_gaseous_2014}.
+
+The inference analysis was conducted identically as mentioned above for \texttt{GASTLI} with $Z_p$ being sampled instead of $\text{CMF}$. Using values of from \cite{muller_bulk_2025} as an initial estimate was used to draw $Z_p$ samples from a uniform distribution.
 
 
+\subsubsection{Reference 1: {P25}}
+The first study we refer to is P25 \citep{peerani_how_2025}, which used \texttt{CEPAM} \citep{guillot_cepam_1995} as the thermal evolution tool. This also assumes a simple core and envelope structure for giant planets. Specifically for this study, the choice for the H/He EoS was CMS19 + HG23 \citep{chabrier_new_2019, howard_accounting_2023} which is similar to the CD21 EoS. Additionally, the atmospheric model is Parmentier's non-grey model \citep{parmentier_non-grey_2015} with an envelope metallicity of $Z_{\text{env}} = 0$. This combination also makes it similar to the solar value.
 
-\subsubsection{Teske et al. 2019}
-Another reference study T19 \citep{teske_metal-rich_2019}. Analysis is identical to \citep{thorngren_mass-metallicity_2016}, \\
-Similarities
-\begin{itemize}
-    \item{need more info about atmospheric model}
-    \item{is radius scaling is consistent or inconsistent}
-    \item{Analysis is also MCMC}
-\end{itemize}
-Differences
-\begin{itemize}
-    \item{H/He EOS is SvCH \citep{saumon_equation_1995}}
-\end{itemize}
+For the inference of $Z_p$, a root-finding method was employed. 5000 draws of the mass, radius and age were used per planet to find the root of a function that is constrained by the observed radius.
 
 
+\subsubsection{Reference 2: T19}
+Another reference study is T19 \citep{teske_metal-rich_2019}. Both thermal evolution and inference methods follow the same exact procedure as in T16 \citep{thorngren_mass-metallicity_2016}. For this, a private thermal evolution tool is used which is not publicly available. For the evolution, the SvCH \citep{saumon_equation_1995} EoS for H/He is applied. 
+
+NOTE: i am unsure what the assigned envelope metallicity is and what kind of atmospheric model the Fortney model is. 
+
+As mentioned, the inference method is the exact same as in T16. This is similar to our methods used for results from \texttt{GASTLI} and \texttt{planetsynth}.
 
 
-
-\subsection{$Z_p$ Inference}
-The inference of the bulk metallicity $Z_p$ of required observational constraints on planetary radius $R_p$, mass $M_p$ and age $\tau_p$. 
-
-The EnsembleSampler from \citep{foreman-mackey_emcee_2013} was used to follow a standard 
-The prior was defined 
+\input{tables/studies_and_parameters}
 
 
-    
-    % For the inference of bulk metallicity $Z_p$, the standard Markov chain Monte Carlo (MCMC) approach was implemented (similar to \cite{muller_towards_2023}). An initial set of planetary parameters $(R_{i},\: M_{i},\: \tau_{i})$ needs to be drawn by sampling prior distributions from observations $(R_{\text{obs}},\: M_{\text{obs}},\: \tau_{\text{obs}})$. For each planet, these initial parameters were drawn using the continuous grid. Since $Z_{\text{env}}$ was fixed and $T_{\text{eq}}$ had no uncertainties for any planets, only $\text{CMF}$, $M$ and $T_{\text{int}}$ were sampled. Since \texttt{GASTLI} works with $T_{\text{int}}$ of a planet and not its $\tau$ directly, a root-finding method was implemented to get an estimate on the minimum and maximum of $T_{\text{int}}$ for the sample space. Brent's algorithm \citep{brent_algorithms_1973} was used on the functions $f_{\min}$ and $f_{\max}$ by using an initial $\text{CMF}_{\text{obs}}$ from the observations to get the bounds $T_{\text{int,min}}$ and $T_{\text{int,max}}$ respectively:
-    % \begin{equation}
-    %     \begin{aligned}
-    %     f_{\min}(T_{\text{int}}) &= \tau_{\text{upper}} - \tau_{\text{pred}}(\text{CMF}_{\text{obs}},\: M_{\text{obs}},\: T_{\text{int}}) \\
-    %     f_{\max}(T_{\text{int}}) &= \tau_{\text{pred}}(\text{CMF}_{\text{obs}},\: M_{\text{obs}},\: T_{\text{int}}) - \tau_{\text{lower}}
-    %     % f_{\text{min}}(T_{\text{int}}) &= \tau_{\text{upper}} - \tau_{\text{pred}}(\text{CMF}_{\text{obs}},\: M_{\text{obs}},\: T_{\text{int}}) \\
-    %     % f_{\text{max}}(T_{\text{int}}) &= \tau_{\text{pred}}(\text{CMF}_{\text{obs}},\: M_{\text{obs}},\: T_{\text{int}}) - \tau_{\text{lower}}
-    %     \end{aligned}
-    % \end{equation}
-
-    % A normal distribution with the observed uncertainty range was assumed for the mass: $M \sim \mathcal{N}(M_{\text{obs}},\: \sigma_M)$. Meanwhile, $\text{CMF}$ and $T_{\text{int}}$ were distributed normally: $\text{CMF} \sim \mathcal{U}(0.01,\ 0.9)$ and $T_{\text{int}} \sim \mathcal{U}(T_{\text{int,int}}-\SI{30}{\kelvin},\ T_{\text{int,max}}+\SI{30}{\kelvin})$. A lower age limit of $1\: \si{\giga\year}$ and an upper age limit of the Universe's age of $14\: \si{\giga\year}$ were imposed. 
-    
-    % $\text{CMF}$ distributions were obtained from the MCMC approach, with which the bulk metallicities were calculated as $Z_p = \text{CMF} + Z_{\text{env}}(1-\text{CMF})$. Normalised metallicity and heavy-element mass were then obtained as $Z_p/Z_*$ (with $Z_* = Z_{\odot} \cdot 10^{[\text{Fe/H}]}$) and $M_Z = Z_p/M_p$ respectively. The relations $M_p - /Z_p/Z_*$ and $M_p - M_Z$ were both modelled by a linear regression between the logarithm of the variables:
-    % \begin{equation}
-    %     \log{y} = \beta_0 + \beta_1 \log{M_p}
-    % \end{equation}
-    % where $M_p$ is the planetary mass in $M_J$, $y = Z_p/Z_*$ or $M_Z$ in $M_{\odot}$ and $\beta_{0,1}$ are the intercept and slope of the linear function. The fit parameters were calculated assuming an Orthogonal Regression Distance (ODR) fit.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \clearpage
 \section{Results}
-\textbf{MONDAY, 02 MARCH}
-TODO:
-\begin{itemize}
-    \item{add all results}
-    \item{fix axes}
-    \item{cooling curves?}
-\end{itemize}
-\clearpage
 
-  %  \begin{figure}[h!]
-  %  \centering
-  %  \includegraphics[width=\hsize]{fig/bulk_metallicity_comparison_hats17b.pdf}
-  %     \caption{Figure as large as the column width}
-  %        \label{fig1}
-  %  \end{figure}
+\subsection{Bulk Metallicity Posterior Distributions}
+The inference of bulk metallicities of giant planets is sensitive to the assumptions of the thermal evolution tools used. Fig.~\ref{fig:3.1_bulk_metallicity_comparison_TE_tools} illustrates the posterior distributions for six representative gas giants that are available in our catalogue, as well as those that have been investigated in the aforementioned studies.
 
-  % \begin{figure}[h!]
-  %  \centering
-  %  \includegraphics[width=\hsize]{fig/bulk_metallicity_comparison_hats72b.pdf}
-  %     \caption{Figure as large as the column width}
-  %        \label{fig2}
-  %  \end{figure}
+\begin{figure*}[!t]
+  \centering
+  \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_4_datasets_cepam_teske_new_fill.pdf}
+  \caption{Posterior distributions of inferred bulk metallicities $Z_p$ of six planets from the catalogue. The distributions representing results from \texttt{GASTLI} (orange) and \texttt{planetsynth} (blue) are obtained following a standard MCMC procedure, initialised with 10000 draws per planet. The raw results were used, leading to skewed distributions. Results from T19 (green)followed the same analysis method. However, since raw data was not available, the results from the study were assumed to follow a normal distribution. Results from P25 (red) followed a root-finding method and only used 5000 initial draws per planet. They were also assumed to follow a normal distribution, as the raw data was not available.}
+  \label{fig:3.1_bulk_metallicity_comparison_TE_tools}
+\end{figure*}
 
-  %  \begin{figure}[h!]
-  %  \centering
-  %  \includegraphics[width=\hsize]{fig/bulk_metallicity_comparison_toi4010d.pdf}
-  %     \caption{Figure as large as the column width}
-  %        \label{fig3}
-  %  \end{figure}
+A primary observation in Fig.~\ref{fig:3.1_bulk_metallicity_comparison_TE_tools} is the difference in the morphologies of the posterior distributions. Results of \texttt{GASTLI} and \texttt{planetsynth} exhibit skewed, non-Gaussian distributions. This skewness is a byproduct of the MCMC procedure of 10000 intial draws, which captures the physical non-linearities of the interior structures. On the other hand, those from P25 and T19 appear as symmetric normal distributions despite following similar sampling procedures (10000 and 5000 initial draws, respectively). This is because the raw data from the studies was unavailable, and thus symmetric errors were assumed for these distributions.
+
+For the individual planets, the primary observation is the systematic shifts of the peak of bulk metallicity $Z_p$ between tools. While the EoS for rocks and water, which represent metals, were different, the EoS for H/He were very similar. Consistent H/He EoS across thermal evolution models lead to a more consistent $Z_p$ prediction. So, while the EoS for H/He might have slight differences, they are not the primary cause for the shifts in peaks. This can be attributed to the atmospheric models used in each thermal evolution tool. These are indeed very different from each, and the transition from a radiative atmosphere to convective interior significantly impacts how the planet would have evolved. This also includes how the envelope is treated, and if it is assumed to be homogeneous and convective, what value is assigned to $Z_{\text{env}}$. These differences across thermal evolution models are highlighted in Tab.~\ref{tab:EoS_and_atm_model}.
 
 
-  %  \begin{figure}
-  %      \centering
-  %      \includegraphics[width=\hsize]{fig/bulk_metallicity_comparison_wasp69b.pdf}
-  %      \caption{Caption}
-  %      \label{fig4}
-  %  \end{figure}
+\subsection{Bulk Metallicity Trends}
+The individual distributions of $Z_p$ in Fig.~\ref{fig:3.1_bulk_metallicity_comparison_TE_tools} highlight tool-specific uncertainties. However, with increasing mass in the mass range $M_p \in [0.01,\ 3] M_J$ reveals a consistent negative trend in bulk metallicity $Z_p$. The magnitude and slope are sensitive to the thermal evolution tool employed. These trends are visualised in Fig.~\ref{fig:3.2_trend_comparison}.
 
-  %  \begin{figure}
-  %      \centering
-  %      \includegraphics[width=\hsize]{fig/bulk_metallicity_comparison_hatp15b.pdf}
-  %      \caption{Caption}
-  %      \label{fig5}
-  %  \end{figure}    
-
-  %  \begin{figure}
-  %      \centering
-  %      \includegraphics[width=\hsize]{fig/bulk_metallicity_comparison_hatp17b.pdf}
-  %      \caption{Caption}
-  %      \label{fig6}
-  %  \end{figure}
-
-\clearpage
-  % \subsection{Individual Planets}
-  \subsection{Posterior Distributions}
-  % \begin{figure*}[!t]
-  %     \centering
-  %     \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_3_datasets_cepam_paper.pdf}
-  %     \caption{Probability distributions of inferred bulk metallicities $Z_p$ of four planets from the catalogue. The curves representing results of \texttt{GASTLI} and \texttt{planetsynth} are obtained using Gaussian KDEs in blue and orange respectively. \texttt{CEPAM} results are represented by the dashed line.}
-  %     \label{fig:3.1_bulk_metallicity_comparison_3_datasets}
-  % \end{figure*}
-
-  % \begin{figure*}
-  %     \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_4_datasets_paper.pdf}
-  %     \caption{Same as Fig.~\ref{fig:3.1_bulk_metallicity_comparison_3_datasets} but for four different planets. An additional study is used for reference and is represented by the dotted-dashed line.}
-  %     \label{fig:3.1_bulk_metallicity_comparison_4_datasets}
-  % \end{figure*}
-
-  The inference of bulk metallicities of giant planets is sensitive to the assumptions of the thermal evolution tools used. Fig.~\ref{fig:3.1_bulk_metallicity_comparison_TE_tools} illustrates the posterior distributions for six representative gas giants that are available in our catalogue, as well as those that have been investigated in the aforementioned studies.
-
-  \begin{figure*}[!t]
-      \centering
-      \includegraphics[width=\hsize]{fig/3.1_bulk_metallicity_comparison_4_datasets_cepam_teske_new_fill.pdf}
-      \caption{Posterior distributions of inferred bulk metallicities $Z_p$ of six planets from the catalogue. The distributions representing results from \texttt{GASTLI} (orange) and \texttt{planetsynth} (blue) are obtained following a standard MCMC procedure, initialised with 10000 draws per planet. The raw results were used, leading to skewed distributions. Results from T19 (green)followed the same analysis method. However, since raw data was not available, the results from the study were assumed to follow a normal distribution. Results from \texttt{CEPAM} (red) followed a root-finding method and only used 5000 initial draws per planet. They were also assumed to follow a normal distribution, as the raw data was not available.}
-      \label{fig:3.1_bulk_metallicity_comparison_TE_tools}
-  \end{figure*}
-
-  % \subsubsection{Distribution Morphology}
-  A primary observation in Fig.~\ref{fig:3.1_bulk_metallicity_comparison_TE_tools} is the difference in the morphologies of the posterior distributions. Results of \texttt{GASTLI} and \texttt{planetsynth} exhibit skewed, non-Gaussian distributions. This skewness is a byproduct of the MCMC procedure of 10000 intial draws, which captures the physical non-linearities of the interior structures. On the other hand, those from \texttt{CEPAM} and T19 appear as symmetric normal distributions despite following similar sampling procedures (10000 and 5000 initial draws, respectively). This is because the raw data from the studies was unavailable, and thus symmetric errors were assumed for these distributions.
-
-  % \subsubsection{Impact of Atmospheric Models and EoS}
-  For the individual planets, the primary observation is the systematic shifts of the peak of bulk metallicity $Z_p$ between tools. While the EoS for rocks and water, which represent metals, were different, the EoS for H/He were very similar. Consistent H/He EoS across thermal evolution models lead to a more consistent $Z_p$ prediction. So, while the EoS for H/He might have slight differences, they are not the primary cause for the shifts in peaks. This can be attributed to the atmospheric models used in each thermal evolution tool. These are indeed very different from each, and the transition from a radiative atmosphere to convective interior significantly impacts how the planet would have evolved. This also includes how the envelope is treated, and if it is assumed to homogeneous, what value is assigned to $Z_{\text{env}}$. These differences across thermal evolution models are highlighted in Tab.~\ref{tab:EoS_and_atm_model}.
-
-\begin{table}[]
-    \begin{tabular}{llll}
-    \hline
-    \hline
-    Tool                 & H/He EoS      & $Z_{\text{env}}$ & Atmospheric Model        \\
-    \hline
-    \texttt{GASTLI}      & CD21          & 0.014            & \texttt{petitCODE} \\
-    \texttt{planetsynth} & CD21          & 0.012            & Freedman? (grey)                   \\
-    \texttt{CEPAM}       & CMS19 + HG23* & 0*               & Parmentier*                \\
-    T19                  & ScVH (T16)    & ?                & Fortney?                  \\
-    \hline
-    \end{tabular}
-    \caption{}
-\label{tab:EoS_and_atm_model}
-\end{table}
-
- 
-
-
-  
-
-  
-
-\
-  
 % \clearpage
-  % \subsection{Trends}
-  % \begin{figure*}[!h]
-  %     \centering
-  %     \includegraphics[width=\hsize]{fig/3.2_trend_comparison.pdf}
-  %     \caption{Inferred bulk metallicity $Z_p$ as a function of planetary mass for $M_p \in [0.01, 3]\, M_J$. \textit{Top panel}: Scatter points and error bars show inferred values for bulk metallicity. The solid lines are their respective fits constructed using orthogonal distance regression. Shaded areas around these lines are the $1\sigma$ uncertainties of this fit. Results from \texttt{GASTLI} and \texttt{planetsynth} are depicted in orange and blue respectively. \textit{Bottom panel}: Residuals of the inferred bulk metallicity values between the two thermal evolution tools. These are calculated by subtracting the \texttt{planetsynth} values fron the \texttt{GASTLI} values. Red points represent planets which had \texttt{planetsynth} predict a higher $Z_p$ than \texttt{GASTLI}.}
-  %     \label{fig:3.2_trend_comparison}
-  % \end{figure*}
+\begin{figure*}
+  \centering
+  \includegraphics[width=\hsize]{fig/3.2_trend_comparison_new.pdf}
+  \caption{Inferred bulk metallicity $Z_p$ as a function of planetary mass for $M_p \in [0.01, 3]\, M_J$. \textit{Top panel}: Scatter points and error bars show inferred values for bulk metallicity. The solid lines are their respective fits constructed using orthogonal distance regression. Shaded areas around these lines are the $1\sigma$ uncertainties of this fit. \textit{Bottom panel}: Residuals of the inferred bulk metallicity values between the two thermal evolution tools. These are calculated by subtracting the \texttt{planetsynth} values from the \texttt{GASTLI} values. Red points represent planets which had \texttt{planetsynth} predict a higher $Z_p$ than \texttt{GASTLI}.}
+  \label{fig:3.2_trend_comparison}
+\end{figure*}
 
-
-\clearpage
-\subsection{Trends in Bulk Metallicity}
-  \begin{figure*}
-      \centering
-      \includegraphics[width=\hsize]{fig/3.2_trend_comparison_new.pdf}
-      \caption{Inferred bulk metallicity $Z_p$ as a function of planetary mass for $M_p \in [0.01, 3]\, M_J$. \textit{Top panel}: Scatter points and error bars show inferred values for bulk metallicity. The solid lines are their respective fits constructed using orthogonal distance regression. Shaded areas around these lines are the $1\sigma$ uncertainties of this fit. Results from \texttt{GASTLI} and \texttt{planetsynth} are depicted in orange and blue respectively. \textit{Bottom panel}: Residuals of the inferred bulk metallicity values between the two thermal evolution tools. These are calculated by subtracting the \texttt{planetsynth} values from the \texttt{GASTLI} values. Red points represent planets which had \texttt{planetsynth} predict a higher $Z_p$ than \texttt{GASTLI}.}
-      \label{fig:3.2_trend_comparison}
-  \end{figure*}
+The top panel of Fig.~\ref{fig:3.2_trend_comparison} shows the orthogonal distance regression fit for the 4 models. Each fit follows a slightly different slope, but all of them are negative. The bottom panel showcases the difference in \texttt{GASTLI}'s and \texttt{planetsynth}'s results for $Z_p$. \texttt{GASTLI} tends to predict higher bulk metallicities, except for exactly eleven planets shown in red. 
   
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \clearpage
-%   \subsection{Cooling curves}
-
-
-
-
-
-    
-    
-   In this section the one-zone model of \citet{baker},
-   originally used to study the Cephe{\"{\i}}d pulsation mechanism, will
-   be briefly reviewed, see Fig.~\ref{fig1}, Table~\ref{t7} and Eq. (\ref{eq3}).
-   For the one-zone-model Baker obtains necessary conditions
-   for dynamical, secular and vibrational (or pulsational)
-   stability (Eqs.\ (34a,\,b,\,c) in Baker \citeyear{baker}).
-   
-   \begin{equation}
-    \label{eq1}
-      \tau_{\mathrm{co}} = \frac{E_{\mathrm{th}}}{L_{r0}} \,,
-   \end{equation}
-   and the \emph{local free-fall time}
-   \begin{equation}
-      \tau_{\mathrm{ff}} =
-         \sqrt{ \frac{3 \pi}{32 G} \frac{4\pi r_0^3}{3 M_{\mathrm{r}}}
-}\,,
-   \end{equation}
-   Baker's $K$ and $\sigma_0$ have the following form:
-   \begin{eqnarray}
-   \label{eq3}
-      \sigma_0 & = & \frac{\pi}{\sqrt{8}}
-                     \frac{1}{ \tau_{\mathrm{ff}}} \\
-      K        & = & \frac{\sqrt{32}}{\pi} \frac{1}{\delta}
-                        \frac{ \tau_{\mathrm{ff}} }
-                             { \tau_{\mathrm{co}} }\,;
-   \end{eqnarray}
-   where $ E_{\mathrm{th}} \approx m (P_0/{\rho_0})$ has been used and
-   \begin{equation}
-   \begin{array}{l}
-      \delta = - \left(
-                    \frac{ \partial \ln \rho }{ \partial \ln T }
-                 \right)_P \\
-      e=mc^2
-   \end{array}
-   \end{equation}
-   is a thermodynamical quantity which is of order $1$ and equal to $1$
-   for nonreacting mixtures of classical perfect gases. The physical
-   meaning of $ \sigma_0 $ and $K$ is clearly visible in the equations
-   above. $\sigma_0$ represents a frequency of the order one per
-   free-fall time. $K$ is proportional to the ratio of the free-fall
-   time and the cooling time. Substituting into Baker's criteria, using
-   thermodynamic identities and definitions of thermodynamic quantities,
-   \begin{displaymath}
-      \Gamma_1      = \left( \frac{ \partial \ln P}{ \partial\ln \rho}
-                           \right)_{S}    \, , \;
-      \chi^{}_\rho  = \left( \frac{ \partial \ln P}{ \partial\ln \rho}
-                           \right)_{T}    \, , \;
-      \kappa^{}_{P} = \left( \frac{ \partial \ln \kappa}{ \partial\ln P}
-                           \right)_{T}
-   \end{displaymath}
-   \begin{displaymath}
-      \nabla_{\mathrm{ad}} = \left( \frac{ \partial \ln T}
-                             { \partial\ln P} \right)_{S} \, , \;
-      \chi^{}_T       = \left( \frac{ \partial \ln P}
-                             { \partial\ln T} \right)_{\rho} \, , \;
-      \kappa^{}_{T}   = \left( \frac{ \partial \ln \kappa}
-                             { \partial\ln T} \right)_{T}
-   \end{displaymath}
-
-
-
-%_____________________________________________________________
-%                     Onecolumn continued float (place early!)
-%-------------------------------------------------------------
-   \begin{figure*}
-        \centering
-        \includegraphics{figure.eps}
-        \includegraphics[angle=90]{figure.eps}
-        \includegraphics{figure.eps}
-        {\caption{A onecolumn \textbackslash figure* with six graphics}}
-        \ContinuedFloat %      \usepackage{subcaption}
-        \includegraphics[angle=90]{figure.eps}
-        \includegraphics{figure.eps}
-        \includegraphics[angle=90]{figure.eps}
-        \caption{continued.}
-        \label{FigGam}%
-    \end{figure*}
-
-% %_____________________________________________________________
-% %                      Another onecolumn float (place early!)
-% %-------------------------------------------------------------
-% \begin{figure*}[h!]
-%    \resizebox{\hsize}{!}
-%             {\includegraphics {figure.eps}}
-%             %{\includegraphics[bb=10 20 100 100,clip]{figure.eps}}
-%       \caption{Another onecolumn figure*}
-%          \label{wide}
-% \end{figure*}
-% \twocolumn
-% \clearpage
-% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
 \section{Discussion}
-\textbf{MONDAY 02 MARCH}
+
+\subsection{Consistency in Scaling Planetary Radii}
+A source of a systematic error in exoplanetary characterisation might arise from the inconsistent use of Jupiter's reference radius. Observations typically report planetary radii scaled to the equatorial radius of Jupiter ($R_{J, \text{eq}} = 11.20\, R_{\oplus}$). Meanwhile, some thermal evolution and interior characterisation tools might scale according to the volumetric mean radius of Jupiter ($R_{J, \text{eq}} = 10.97\, R_{\oplus}$). 
+
+It is essential for the reference radius to be consistent across observations and analysis frameworks to ensure self-consistent retrieval. The framework within \texttt{GASTLI} already uses $R_{J,\text{eq}}$ for radius conversions. To highlight the impact this choice of radius has, we look at the impact of working with inconsistent radii conversions. For this, we manually scale the radius values by the factor $k_J = R_{J,\text{mean}} / R_{J,\text{eq}} \approx 0.98$, leading to a smaller radius than observed. This inconsistency leads to a systematic bias in the inferred bulk properties. To quantify this effect, we compared retrievals on \texttt{GASLTI} for the planet K2-114 b, as seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}.
+
 \begin{itemize}
-    \item{4.2: EOS, Analysis method}
-    \item{4.2: atmospheres}
+  \item{\textbf{Consistent}: Observations and analysis radii are scaled into Juipter radii with the equatorial radius $R_{J,\text{eq}}$.}
+  \item{\textbf{Inconsistent}: Observations follow $R_{J,\text{eq}}$, whereas the analysis manually rescales radii to use the volumetric mean radius $R_{J,\text{mean}}$.}
 \end{itemize}
-  % \subsection{Correction for radius conversion}
-  \subsection{Consistency in Scaling Planetary Radii}
-  % \begin{itemize}
-  %     \item{Observations display measurements of radii with conversion from Earth to Jupiter radii as $R_{J, \text{mean}} = 10.97\, R_{\oplus}$. This is the volumetric mean radius of Jupiter.}
-  %     \item{\texttt{GASTLI} works with $R_{J, \text{eq}} = 11.20\, R_{\oplus}$, which is the equatorial radius of Jupiter.}
-  %     \item{It is important to consider that the conversions to Jupiter radii are consistent across our analyses.}
-  %     \item{Thus, both observation and retrieval should use a consistent conversion factor. Either, $R_{J, \text{mean}}$ or $R_{J, \text{eq}}$.}
-  %     \item{To highlight the impact an inappropriate conversion has, one can observe the difference in retrievals for different radii in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}.}
-  % \end{itemize}
 
-  % A source of systematic error in exoplanetary characterisation might arise from the inconsistent use of Jupiter's reference radius. Observations typically report planetary radii scaled to the volumetric mean radius of Jupiter ($R_{J, \text{mean}} = 10.97\, R_{\oplus}$). Meanwhile, thermal evolution and interior characterisation tools, such as \texttt{GASTLI}, scale according to Juipter's equatorial radius ($R_{J, \text{eq}} = 11.20\, R_{\oplus}$) \citep{acuna_gastli_2024}. 
-  
-  
-  % must be applied to the observed radii. Failure to account for this discrepancy leads to a systematic bias in the inferred bulk properties.  
-  % % 0.02 change in radius, leads to 0.05 change in bulk metallicity -> TODO: decide if this information should be included!
-  % To quantify this effect, we compared two retrievals for the planet K2-114 b:
-  % % \begin{enumerate}
-  % %     \item{\textbf{Uncorrected:} Observations are used directly without accounting for the $R_{J, \text{mean}}$ to $R_{J, \text{eq}}$ offset.}
-  % %     \item{\textbf{Corrected:} Observations are scaled by $k_J$ to match the \texttt{GASTLI} framework.}
-  % % \end{enumerate}
-  % \begin{itemize}
-  %     \item{\textbf{Uncorrected:} Observations are used directly without accounting for the $R_{J, \text{mean}}$ to $R_{J, \text{eq}}$ offset.}
-  %     \item{\textbf{Corrected:} Observations are scaled by $k_J$ to match the \texttt{GASTLI} framework.}
-  % \end{itemize}
+\begin{figure}[h]
+  \centering
+  % \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay.pdf}
+  \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay_new.pdf}
+  \caption{Posterior distributions for the radius $R_p$ and bulk metallicity $Z_p$ of K2-114 b with observed radius $R_{p,\text{obs}} = 0.93^{+0.03}_{-0.03}\, R_J$, following the equatorial radius. Vertical lines represent in the first plot represent the ``true'' radius value $R_p$ used for the analysis. The red contours represent the consistent retrieval which also utilises the equatorial radius: $R_p = R_{p,\text{obs}}$. The gray contours represent the inconsistent retrieval which scales according to the volumetric mean radius: $R_p <  R_{p,\text{obs}}$. The shift towards a lower $Z_p$ in the inconsistent case demonstrates the impact of the radius value on inferred composition.}
+  \label{fig:3.3_corner_plot_comparison_overlay}
+\end{figure}
+
+As seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}, both cases assume different values for the ``true'' radius based on the reference Jupiter radius used. In the consistent case, the true radius already matches the observed value ($R_{p,\text{obs}} = 0.93^{+0.03}_{-0.03}\, R_J$) and yields an inferred bulk metallicity of $Z_p = 0.31^{+0.08}_{-0.08}$. However, in the inconsistent case the true radius is smaller than the observed value ($R_{p,\text{obs}} = 0.91^{+0.03}_{-0.03}\, R_J$). The MCMC sampler is forced to predict a higher radius in order to match the observation, yielding a lower inferred bulk metallicity of $Z_p = 0.26^{+0.08}_{-0.08}$. Thus, the price for overestimating radii to match observation is paid by having to underestimate the inferred bulk metallicity.
+ %concrete numbers: 0.02 R_J increase in radius leads to 0.05 decrease in Zp -> mention? if yes, how do we justify this?
 
 
-  % \begin{figure}[!h]
-  %     \centering
-  %     \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_Thesis.pdf}
-  %     \caption{TODO}
-  %     \label{fig:3.3_corner_plot_comparison_thesis}
-  % \end{figure}
-
-  % \begin{figure}[!h]
-  %     \centering
-  %     \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_Internship.pdf}
-  %     \caption{TODO}
-  %     \label{fig:3.3_corner_plot_comparison_internship}
-  % \end{figure}
-
-  % \begin{figure}[!h]
-  %     \centering
-      % \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay.pdf}
-      % \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay_new.pdf}
-  %     % \caption{Posterior distributions for the radius $R_p$ and bulk metallicity $Z_p$       of K2-114 b. The gray contours represent the retrieval without radius correction ($R_p = 0.93^{+0.03}_{-0.03}\, R_J$), while the red contours represent the consistent retrieval scaled by $k_J$ (($R_p = 0.95^{+0.03}_{-0.03}\, R_J$). The shift towards a lower $Z_p$ in the corrected case demonstrates the impact of the radius value on inferred composition. % Thesis results are in gray, while the internship ones are in red. Thesis: $R_p = 0.93^{+0.03}_{-0.03}\, R_J$, $Z_p = 0.30^{+0.07}_{-0.07}$. Internship: $R_p = 0.95^{+0.03}_{-0.03}\, R_J$, $Z_p = 0.26^{+0.08}_{-0.08}$.}
-  %     \caption{TODO}
-  %     \label{fig:3.3_corner_plot_comparison_overlay}
-  % \end{figure}
-
-    % Thesis: $R_p = 0.93 \pm 0.03\, R_J$, $Z_p = 0.26 \pm 0.08$
-    % Internship: $R_p = 0.95 \pm 0.03\, R_J$, $Z_p = 0.26 \pm 0.08$
-  % Thesis did not make any corrections. Observations were assumed to work with volumetric mean radius, while the analysis with \texttt{GASTLI} worked with the equatorial radius.
-  % Internship enhanced observations by a factor of $k = R_{J, \text{eq}} / R_{J, \text{mean}}$ to enure consistency with \texttt{GASTLI}'s framework.
-  % Thus, Thesis predicted a higher $Z_p$ for the same planet for which Internship predicts a lower value. This is because Internship assumes a larger planet, thus making it less dense and therefore inferring a lower value for $Z_p$.
-
-  % As seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}, the uncorrected case (gray) yields a smaller radius ($R_p = 0.93^{+0.03}_{-0.03}\, R_J$), which increases the inferred planetary density. As a consequence, the retrieval compensates by overestimating the bulk metallicity ($Z_p = 0.30^{+0.07}_{-0.07}$). By applying the correction factor $k_J$ (red), the larger effective radius ($R_p = 0.95^{+0.03}_{-0.03}\, R_J$) leads to lower bulk metallicity estimate ($Z_p = 0.26^{+0.08}_{-0.08}$). This shift highlights the necessity of consistency when coupling interior structure models with observational data. For this work, it was ensured that the correction was applied to analyses done by both \texttt{GASTLI} and \texttt{planetsynth}.
-
-
-  A source of systematic error in exoplanetary characterisation might arise from the inconsistent use of Jupiter's reference radius. Observations typically report planetary radii scaled to the equatorial radius of Jupiter ($R_{J, \text{eq}} = 11.20\, R_{\oplus}$). Meanwhile, some thermal evolution and interior characterisation tools might scale according to the volumetric mean radius of Jupiter ($R_{J, \text{eq}} = 10.97\, R_{\oplus}$). 
-
-  It is essential for the reference radius to be consistent across observations and analysis frameworks to ensure a self-consistent retrieval. The framework within \texttt{GASTLI} already uses $R_{J,\text{eq}}$ for radius conversions. To highlight the impact this choice of radius has, we look at the impact of working with inconsistent radii conversions. For this, we manually scale the radius values by the factor $k_J = R_{J,\text{mean}} / R_{J,\text{eq}} \approx 0.98$, leading to a smaller radius than observed. This inconsistency leads to a systematic bias in the inferred bulk properties. To quantify this effect, we compared retrievals on \texttt{GASLTI} for the planet K2-114 b, as seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}.
-
-  \begin{itemize}
-      \item{\textbf{Consistent}: Observations and analysis radii are scaled into Juipter radii with the equatorial radius $R_{J,\text{eq}}$.}
-      \item{\textbf{Inconsistent}: Observations follow $R_{J,\text{eq}}$, whereas the analysis manually rescales radii to use the volumetric mean radius $R_{J,\text{mean}}$.}
-  \end{itemize}
-
-  \begin{figure}[!h]
-      \centering
-      % \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay.pdf}
-      \includegraphics[width=\hsize]{fig/3.3_corner_plot_comparison_overlay_new.pdf}
-      \caption{Posterior distributions for the radius $R_p$ and bulk metallicity $Z_p$ of K2-114 b with observed radius $R_{p,\text{obs}} = 0.93^{+0.03}_{-0.03}\, R_J$, following the equatorial radius. Vertical lines represent in the first plot represent the ``true'' radius value $R_p$ used for the analysis. The red contours represent the consistent retrieval which also utilises the equatorial radius: $R_p = R_{p,\text{obs}}$. The gray contours represent the inconsistent retrieval which scales according to the volumetric mean radius: $R_p <  R_{p,\text{obs}}$. The shift towards a lower $Z_p$ in the inconsistent case demonstrates the impact of the radius value on inferred composition.}
-      % \caption{TODO}
-      \label{fig:3.3_corner_plot_comparison_overlay}
-  \end{figure}
-
-  As seen in Fig.~\ref{fig:3.3_corner_plot_comparison_overlay}, both cases assume different values for the ``true'' radius based on the reference Jupiter radius used. In the consistent case, the true radius already matches the observed value ($R_{p,\text{obs}} = 0.93^{+0.03}_{-0.03}\, R_J$) and yields an inferred bulk metallicity of $Z_p = 0.31^{+0.08}_{-0.08}$. However, in the inconsistent case the true radius is smaller than the observed value ($R_{p,\text{obs}} = 0.91^{+0.03}_{-0.03}\, R_J$). The MCMC sampler is forced to predict a higher radius in order to match the observation, yielding a lower inferred bulk metallicity of $Z_p = 0.26^{+0.08}_{-0.08}$. Thus, the price for overestimating radii to match observation is paid by having to underestimate the inferred bulk metallicity.
-  %concrete numbers: 0.02 R_J increase in radius leads to 0.05 decrease in Zp -> mention? if yes, how do we justify this?
-
-  
+% \clearpage
 \subsection{Talking Points about Differences}
-\subsubsection{Structure}
+Divergences in the inferred bulk metallicities across the four evolution tools highlight how significant the role of model noise plays in the characterisation of exoplanets. 
+
+\subsubsection{Structure \& EoS}
+A fundamental factor to consider is the treatment of the planetary structure. All four mentioned evolutions assume a standard core+envelope architecture with a homogeneous and convective envelope. However, the definition of metals and the materials used to represent them vary:
+
 \begin{itemize}
-    \item{are all core + envelope? GASTLI, CEPAM and Teske definitely do. I'm guessing so does planetsynth, but confirm}
-    \item{is envelope econvective for all?}
-    \item{what is used to model metals? rocks, water or mixture}
+    \item{\textbf{Material Modelling:} the choice of modelling heavy elements as pure rock (silicates), water or a mixture creates offsets in the bulk density calculations. Since the EoS for these materials differs across the tools, the inferred metallicity required to match observed radii measurements will fluctuate, despite identical H/He EoS.}
+    \item{\textbf{H/He:}} Since giant planets are primarily composed of H and He, the choice of their EoS significantly impacts the inference of their bulk properties. While the results from \texttt{GASTLI} and \texttt{planetsynth} are consistent with each other (CD21) and very similar to P25 (CMS19+HG23), T19 still utilises ScVH. This can lead to a variety in compressibility gradients. Thus, even slight variations in the density at large pressures are followed by significant shifts in $Z_p$ to match the observed radius.
+\end{itemize}
+% \newpage
+
+\subsubsection{Inference Methods}
+The statistical approach used to infer $Z_p$ also dictates the shifts in the results.
+\begin{itemize}
+    \item{\textbf{MCMC Sampling:} The inference done for \texttt{GASTLI}, \texttt{planetsynth} and T19 utilised MCMC procedures with 10000 steps. This allowed for a full exploration of the parameter space, capturing the skewed nature of the posterior distributions. This approach is limited by multiple observational constraints (mass, age, radius).}
+    \item{\textbf{Root-Finding:} In contrast, P25 employed a root-finding method. Thus the model is limited to only a single observational constraint, the radius. This could also explain why the posterior distributions tend to be narrower.}
 \end{itemize}
 
-\subsubsection{EOS}
+
+\subsubsection{Systematic Shifts vs. Robust Trends}
+Despite the existence of systematic shifts in the individual values of $Z_p$, the most vital takeaway is should be the difference between absolute shifts and relative trends.
 \begin{itemize}
-    \item{naturally, all have different EOS. at least we tried to get H/He EoS as consistent as possible}
-    \item{but Teske uses SvCH \citep{saumon_equation_1995}}
-    \item{why is H/He so important? all other EoS are different -> rock (modelled by various different materials and thus naturally different EoS), ice (modelled by water, but often with different EoS) and the rock-ice mixture)}
+    \item{\textbf{Model Shifts:} An example of absolute and systematic shifts is portrayed in the bottom panel of Fig.~\ref{fig:3.2_trend_comparison}. It shows that \texttt{GASTLI} trends to predicts higher metallicites than \texttt{planetsynth}, particularly at lower masses. This could be explained by the differences in the atmospheric boundary conditions.}
+    \item{\textbf{Agreement on Trends:} One should notice that in spite of these shifts, all four tools reconstruct a similar negative trend for the mass-metallicity relation. This indicates that while tools may not agree with each other on the exact amount of heavy elements present in a planet, they do agree that with increasing mass giant planets are less likely to be heavily enriched in metals. This means they are in agreement of efficiency of metal enrichment during the planet formation proceess across mass scales.}
 \end{itemize}
 
-\subsubsection{Analysis method}
-\begin{itemize}
-    \item{GASTLI, planetsynth and T19 all uses MCMC with 10000 steps}
-    \item{CEPAM used root-finding method, essentially limiting itself to 1 obsverational constraint: the radius}
-    \item{Does this have any significant impacts?}
-\end{itemize}
-
-% % \clearpage
-%   \begin{figure}[!h]
-%       \centering
-%       \includegraphics[width=\hsize]{fig/3.3_box_plot_comparison_radius.pdf}
-%       \caption{TODO}
-%       \label{fig:3.3_box_plot_comparison_radius}
-%   \end{figure}
-
-%   \begin{figure}[!h]
-%       \centering
-%       \includegraphics[width=\hsize]{fig/3.3_box_plot_comparison_bulk_metallicity.pdf}
-%       \caption{TODO}
-%       \label{fig:3.3_box_plot_comparison_bulk_metallicity}
-%   \end{figure}
-
-
-
-\clearpage
-\section{Figures examples}
-Examples of figures using graphicx. 
-The guide "Using Imported Graphics in LaTeX2e" by Keith Reckdahl
-is available on a lot of \LaTeX public servers or CTAN mirrors.
-
-
-%_____________________________________________________________
-%                        A figure as large as the column width
-%-------------------------------------------------------------
-   \begin{figure}[h!]
-   \centering
-   \includegraphics[width=\hsize]{figure.eps}
-      \caption{Figure as large as the column width}
-         \label{fig1}
-   \end{figure}
-%
-%_____________________________________________________________
-%                                             A rotated figure
-%-------------------------------------------------------------
-   \begin{figure}[h!]
-   \centering
-   \includegraphics[angle=-90,width=2cm]{figure.eps}
-      \caption{Rotated figure}
-         \label{fig2}
-   \end{figure}
-%
-%_____________________________________________________________
-%                        Figure with caption on the right side
-%-------------------------------------------------------------
-   \begin{figure}[h!]
-   \sidecaption
-   \includegraphics[width=2cm]{figure.eps}
-      \caption{Figure with caption on the right side}
-         \label{fig3}
-   \end{figure}
-
-
-%_____________________________________________________________
-%                                Figure with a new BoundingBox
-%-------------------------------------------------------------
-   \begin{figure}
-   \centering
-   \includegraphics[bb=5 20 60 60,width=3cm,clip]{figure.eps}
-      \caption{Figure with a new BoundingBox}
-         \label{fig4}
-   \end{figure}
-
-
-
-%_____________________________________________________________
-%                              A figure including two graphics
-%-------------------------------------------------------------
-   \begin{figure}[h!]
-   \centering
-    \includegraphics{figure.eps}
-    \includegraphics[angle=90]{figure.eps}
-    \includegraphics{figure.eps}
-      \caption{A figure including three graphics}
-         \label{fig5}
-   \end{figure}
-
-
-%_____________________________________________________________
-%                                   Continued figure numbering
-%      \usepackage{subcaption} and the command \ContinuedFloat
-%-------------------------------------------------------------
-
-    \begin{figure}
-    \centering
-    \includegraphics[width=3cm]{figure.eps}
-      \caption{Continued figure numbering}
-         \label{cont1}
-    
-    \centering
-    \ContinuedFloat %      \usepackage{subcaption}
-    \includegraphics[width=3cm]{figure.eps}
-        \caption{continued.}
-             \label{cont2}
-
-    \centering
-    \ContinuedFloat %      \usepackage{subcaption}
-    \includegraphics[width=3cm]{figure.eps}
-        \caption{continued.}
-             \label{cont3}
-    \end{figure}
-
-
-\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Tables examples}
-
-
-
-The jump in table numbering below is caused by the command
-\textbackslash longtable*. This command only works in the onecolumn
-environment. For this reason, we recommend either:
+\section{Summary \& Conclusions}
+We compared the inferred bulk metallicities of gas giants using \texttt{GASTLI} and \texttt{planetsynth} with a standard MCMC sampling procedure. The results were also compared to P25 and T19. Our main conclusions can be  summarised as follows:
 \begin{itemize}
-\item placing your long tables in onecolumn appendices (cf.~\ref{ltapp} and ~\ref{lsltapp}),
-\item or using the longtab environment as illustrated by tables ~\ref{longtable1} and ~\ref{longtable2}.
-Note that the longtab environment will preserve the table
-numbering and automatically places long tables after the appendices.
-They will be moved inside the appendices by the Publisher, if necessary.
+    \item{There are systematic shifts in the bulk metallicity estimates and they stem from different model assumptions, such as the used atmospheric models and EoS.}
+    \item{We tried working with consistent H/He EoS, while the EoS of rock and water varied significantly across all four tools. As H and He are the most abundant elements in the envelope of gas giants, it is more important to ensure that at least their EoS is consistent. Only in T19 was an older EoS used for H/He.}
+    \item{The choice of inference between MCMC sampling and root-finding methods also affects the results. The method of root-finding  is limited to one observational constraint only. MCMC sampling, on the other hand, uses multiple observational constraints allowing  for a more extended exploration of the parameter space.}
+    \item{Despite the shifts in individual estimates of the planetary bulk metallicity, the inferred trend of the decreasing mass-metallicity relation is robust.}
+    %This confirms that population-level insights are robust to variations across models.}
+    \item{TODO: radius scaling and its impact}
 \end{itemize}
-
-%_____________________________________________________________
-%                                             Simple A&A Table
-%-------------------------------------------------------------
-\begin{table}[h!]
-\caption{Simple A\&A Table}                 % title of Table
-\label{table:1}    % is used to refer this table in the text
-\centering                        % used for centering table
-\begin{tabular}{c c c c}      % centered columns (4 columns)
-\hline\hline               % inserts double horizontal lines
-HJD & $E$ & Method\#2 & Method\#3 \\         % table heading
-\hline                      % inserts single horizontal line
-   1 & 50 & $-837$ & 970 \\    % inserting body of the table
-   2 & 47 & 877    & 230 \\
-\hline                                  %inserts single line
-\end{tabular}
-\end{table}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                                  Long tables
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%_____________________________________________________________
-%                     Long table using the longtab environment
-%-------------------------------------------------------------
-\longtab[1]{
-\begin{longtable}{lllrrr}
-\caption{A long table using the longtab environment}\\
-\label{longtable1}\\
-\hline\hline
-Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
-\hline
-\endfirsthead
-\caption{continued.}\\
-\hline\hline
-Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
-\hline
-\endhead
-\hline
-\endfoot
-%%
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86
-\footnote{Source not included in the HRI catalog. See Sect.~5.4.2 for details.}
-         & 5.92 & K0 V & 10.91& S & 0.058230\\
-                  & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
-         & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
-         & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   
-\end{longtable}
-}
-
-
-%_____________________________________________________________
-%       Long table in landscape using the longtab environment
-%-------------------------------------------------------------
-\longtab[2]{
-\begin{landscape}
-\begin{longtable}{lllrrr}
-\caption{A long landscape table using the longtab environment}\\
-\label{longtable2} \\
-\hline\hline
-Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
-\hline
-\endfirsthead
-\caption{continued.}\\
-\hline\hline
-Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
-\hline
-\endhead
-\hline
-\endfoot
-%%
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86
-\footnote{Source not included in the HRI catalog. See Sect.~5.4.2 for details.}
-         & 5.92 & K0 V & 10.91& S & 0.058230\\
-         Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   
-\end{longtable}
-\end{landscape}
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                           End of long tables.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%_____________________________________________________________
-%                                             Table with notes
-%-------------------------------------------------------------
-% Single note
-%-------------------------------------------------------------
-\begin{table}[h!]
-\caption{\label{t7}Table with notes}
-\centering
-\begin{tabular}{lcc}
-\hline\hline
-Star&Spectral type&RA(J2000)\\
-\hline
-69           &B1\,V     &09 15 54.046\\
-LS~1267~(86) &O8\,V     &09 15 52.787\\
-24.6         &7.58      &1.37\\
-\hline
-MO 2-119     &B0.5\,V   &09 15 33.7\\
-LS~1269      &O8.5\,V   &09 15 56.60\\
-\hline
-\end{tabular}
-\tablefoot{The top panel shows likely members of Pismis~11. The bottom panel displays stars outside the clusters.}
-\end{table}
-
-%-------------------------------------------------------------
-% More notes
-%-------------------------------------------------------------
-\begin{table}[h!]
-\caption{\label{t8}Table with multiple notes}
-\centering
-\begin{tabular}{lcc}
-\hline\hline
-Star&Spectral type&RA(J2000)\\
-\hline
-69           &B1\,V     &09 15 54.046\\
-LS~1267~(86) &O8\,V     &11.07\tablefootmark{a}\\
-24.6         &7.58\tablefootmark{1}&1.37\tablefootmark{a}\\
-\hline
-MO 2-119     &B0.5\,V   &11.74\tablefootmark{c}\\
-LS~1269      &O8.5\,V   &10.85\tablefootmark{d}\\
-\hline
-\end{tabular}
-\tablefoot{The top panel shows likely members of Pismis~11. The bottom panel displays stars outside the clusters.\\
-\tablefoottext{a}{Photometry for MF13, LS~1267 and HD~80077 from
-Dupont et al.}
-\tablefoottext{b}{Photometry for LS~1262, LS~1269 from
-Durand et al.}
-\tablefoottext{c}{Photometry for MO2-119 from
-Mathieu et al.}
-}
-\end{table}
-
-
-%____________________________________________________________
-%                                       Table with references
-%-------------------------------------------------------------
-
-\begin{table}[h]
- \caption[]{\label{nearbylistaa2}Table with references}
-\begin{tabular}{lccc}
- \hline \hline
- SN name&Epoch&Bands\\
- &
-  (with respect to $B$ maximum) &
- &
- \\ \hline
-1981B   & 0 & {\it UBV}\\
-1990N   & 2, 7 & {\it UBVRI}\\
-1991M   & 3 & {\it VRI}\\
-\hline
-\noalign{\smallskip}
-\multicolumn{4}{c}{ SNe 91bg-like} \\
-\noalign{\smallskip}
-\hline
-1991bg   & 1, 2 & {\it BVRI}\\
-1999by   & $-$5, $-$4, $-$3, 3, 4, 5 & {\it UBVRI}\\
-\hline
-\noalign{\smallskip}
-\multicolumn{4}{c}{ SNe 91T-like} \\
-\noalign{\smallskip}
-\hline
-1991T   & $-$3, 0 & {\it UBVRI}\\
-2000cx  & $-$3, $-$2, 0, 1, 5 & {\it UBVRI}\\ %
-\hline
-\end{tabular}
-\tablebib{(1)~\citet{zheng};
-(2) \citet{mizuno}; (3) \citet{balluch}; (4) \citet{cox};
-(5) \citet{cox69}; (6) \citet{tscharnuter}; (7) \citet{terlevich};
-(8) \citet{yorke80a}.
-}
-\end{table}
-
-\newpage 
+%Currently, the community tends to overlook the significance of the theoretical uncertainties. As a community, we could either move towards a more standardised approach , or simply put more emphasis on these uncertainties and include them in discussions in more detail. It might also be interesting to replicate this study for different types of interior structures, that are not limited to the simple core+envelope model. 
+% Additionally, facilities such as JWST might increase observational precision. As this would help refine internal boundary conditions and 
+Ultimately, as we enter an era of high-precision spectroscopy with facilities like JWST and Ariel, the bottleneck for understanding giant planets may no longer be the quality of our observations, but the limitations of our theoretical frameworks. Our study demonstrates that while individual bulk metallicity estimates remain sensitive to the choice of atmospheric boundary conditions and equations of state, the overarching trends of planetary formation remain visible through the modeling noise. By acknowledging and quantifying these systematic shifts, we can better calibrate our expectations, ensuring that our search for the origins of giant planets is built upon a transparent and robust theoretical foundation.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions}
-\textbf{WEDNESDAY 04 MARCH}
-\begin{itemize}
-    \item{outline for conclusion}
-    \item{think about abstarct and appendix}
-\end{itemize}
-Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. In hac habitasse platea dictumst. In-
-teger tempus convallis augue. Etiam facilisis.
-\cite{acuna_characterisation_2021}
+% \begin{acknowledgements}
+%       Part of this work was supported by \emph{ESO}, project
+%       number Ts~17/2--1. \citep{acuna_characterisation_2021}
+% \end{acknowledgements}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{acknowledgements}
-      Part of this work was supported by \emph{ESO}, project
-      number Ts~17/2--1. \citep{acuna_characterisation_2021}
-\end{acknowledgements}
-
 \bibliographystyle{aa}
 \bibliography{references}
 % \printbibliography
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1117,6 +396,16 @@ teger tempus convallis augue. Etiam facilisis.
 % They will be placed automatically on a new page.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{appendix}
+\onecolumn
+\section{Planet Catalogue}
+
+% % table of planet catalogue \\
+% % other plots?
+% \onecolumn
+% \include{tables/gastli_planetsynth_catalogue}
+\input{tables/gastli_planetsynth_catalogue}
+% \include{tables/planet_catalogue}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % In the PDF output, floats should be placed
 % under their own appendix, not before the title, nor after the
@@ -1136,393 +425,393 @@ teger tempus convallis augue. Etiam facilisis.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%____________________________________________________________
-%       Wide floats at the start of an appendix: first method
-%-------------------------------------------------------------
-% To prevent a blank page after the start of an appendix:
-% - Switch to one \onecolumn first
-% - Declare the section title
-% - Declare the onecolumn float with the parameter [h!]
-% - Revert to \twocolumn at the end of the section
-\onecolumn
-\section{Wide tables and figures after an appendix title: recommended method}
-%
+% %____________________________________________________________
+% %       Wide floats at the start of an appendix: first method
+% %-------------------------------------------------------------
+% % To prevent a blank page after the start of an appendix:
+% % - Switch to one \onecolumn first
+% % - Declare the section title
+% % - Declare the onecolumn float with the parameter [h!]
+% % - Revert to \twocolumn at the end of the section
+% \onecolumn
+% \section{Wide tables and figures after an appendix title: recommended method}
+% %
 
-In the PDF output, \underline{floats should be placed
-under their own appendix}, not before the title, nor after the
-title of the next appendix. In short appendices, one-column floats
-\{figure*\} or \{table*\} will generate
-a blank page. To prevent this behaviour, we recommend to switch
-to \textbackslash onecolumn and set the [h!] parameter 
-in your floats: please check the \LaTeX code of this appendix.\\
+% In the PDF output, \underline{floats should be placed
+% under their own appendix}, not before the title, nor after the
+% title of the next appendix. In short appendices, one-column floats
+% \{figure*\} or \{table*\} will generate
+% a blank page. To prevent this behaviour, we recommend to switch
+% to \textbackslash onecolumn and set the [h!] parameter 
+% in your floats: please check the \LaTeX code of this appendix.\\
 
-In case you have a lot of floating objects for little text and the 
-\LaTeX engine moves the floats away from their context, the command
-\textbackslash FloatBarrier of the “placeins” package will empty the
-float buffer and place all stored floats in the continuity. If you still encounter problems with wide floats placement, just use the \textbackslash onecolumn
-environment throughout the appendices.
-
-
-\begin{figure*}[h!]
-    \centering
-     \resizebox{12cm}{12cm}
-    {\includegraphics {figure.eps}}
-     \caption{A one-column \{figure*\}[h!] after a section title.
-      If text follows like below, it is easier to finish the section in
-      \textbackslash onecolumn. If needed, you may revert to \textbackslash
-      twocolumn when reaching the next page.}
-      \label{fig5ap}
-\end{figure*}
+% In case you have a lot of floating objects for little text and the 
+% \LaTeX engine moves the floats away from their context, the command
+% \textbackslash FloatBarrier of the “placeins” package will empty the
+% float buffer and place all stored floats in the continuity. If you still encounter problems with wide floats placement, just use the \textbackslash onecolumn
+% environment throughout the appendices.
 
 
-% If text follows like so 
-\lipsum[1-2]
-% it is easier to finish the page in onecolumn and revert to
-% twocolumn when starting the next page if needed.}
+% \begin{figure*}[h!]
+%     \centering
+%      \resizebox{12cm}{12cm}
+%     {\includegraphics {figure.eps}}
+%      \caption{A one-column \{figure*\}[h!] after a section title.
+%       If text follows like below, it is easier to finish the section in
+%       \textbackslash onecolumn. If needed, you may revert to \textbackslash
+%       twocolumn when reaching the next page.}
+%       \label{fig5ap}
+% \end{figure*}
 
 
-\FloatBarrier %\usepackage{placeins}
-\twocolumn
-%____________________________________________________________
-%       Wide floats at the start of an appendix: second method
-%-------------------------------------------------------------
-% To prevent a blank page, a second method is:
-% - Declare the onecolumn float *
-% - Declare the section under the float
-% However, this method should be reserved to appendices
-% containing only onecolumn tables or figures.
-\begin{table*}[h!]
-\section{Wide tables and figures after an appendix title: alternate method}
-%
-
-To prevent a blank page, a second method is to insert
-the appendix title \underline{after} declaring the onecolumn float.
-\newline This method should be reserved to appendices
-containing only one-column floats\{figure*\} or \{table*\}
-and no text.
-
-\caption {A one-column \{table*\} \newline}
-\label{table:2} 
-\centering
-\begin{tabular}{crrlcl}
-\hline\hline             
-ISO-L1551 & $F_{6.7}$~[mJy] & $\alpha_{6.7-14.3}$
-& YSO type$^{d}$ & Status & Comments\\
-\hline
-  \multicolumn{6}{c}{\it New YSO candidates}\\ % To combine 6 columns into a single one
-\hline
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-\hline
-  \multicolumn{6}{c}{\it Previously known YSOs} \\
-\hline
-  61 & 0.89 $\pm$ 0.58 & 1.77 & Class I & \object{HH 30} & Circumstellar disk\\
-  96 & 38.34 $\pm$ 0.71 & 37.5& Class II& MHO 5          & Spectral type\\
-\hline
-\end{tabular}
-\end{table*}
+% % If text follows like so 
+% \lipsum[1-2]
+% % it is easier to finish the page in onecolumn and revert to
+% % twocolumn when starting the next page if needed.}
 
 
-\FloatBarrier %\usepackage{placeins}
-\twocolumn
-%____________________________________________________________
-% A long table in appendix
-%------------------------------------------------------------
-% This is the start of the page
-\onecolumn
-\section{Long tables in appendices}
-For long tables (multipage) in appendices, we use the method described in appendix A.
-For long landscape tables, please refer to Appendix E.
-\begin{longtable}{lllrrr}
-%
+% \FloatBarrier %\usepackage{placeins}
+% \twocolumn
+% %____________________________________________________________
+% %       Wide floats at the start of an appendix: second method
+% %-------------------------------------------------------------
+% % To prevent a blank page, a second method is:
+% % - Declare the onecolumn float *
+% % - Declare the section under the float
+% % However, this method should be reserved to appendices
+% % containing only onecolumn tables or figures.
+% \begin{table*}[h!]
+% \section{Wide tables and figures after an appendix title: alternate method}
+% %
 
-\caption{A long table}\\
-\label{ltapp} \\
-\hline\hline
-Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
-\hline
-\endfirsthead
-\caption{continued.}\\
-\hline
-Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
-\hline
-\endhead
-\hline
-\endfoot
-%%
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86
-\footnote{Source not included in the HRI catalog. See Sect.~5.4.2 for details.}
-         & 5.92 & K0 V & 10.91& S & 0.058230\\
-                  & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
-         & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
-         & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   
-\end{longtable}
+% To prevent a blank page, a second method is to insert
+% the appendix title \underline{after} declaring the onecolumn float.
+% \newline This method should be reserved to appendices
+% containing only one-column floats\{figure*\} or \{table*\}
+% and no text.
+
+% \caption {A one-column \{table*\} \newline}
+% \label{table:2} 
+% \centering
+% \begin{tabular}{crrlcl}
+% \hline\hline             
+% ISO-L1551 & $F_{6.7}$~[mJy] & $\alpha_{6.7-14.3}$
+% & YSO type$^{d}$ & Status & Comments\\
+% \hline
+%   \multicolumn{6}{c}{\it New YSO candidates}\\ % To combine 6 columns into a single one
+% \hline
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+% \hline
+%   \multicolumn{6}{c}{\it Previously known YSOs} \\
+% \hline
+%   61 & 0.89 $\pm$ 0.58 & 1.77 & Class I & \object{HH 30} & Circumstellar disk\\
+%   96 & 38.34 $\pm$ 0.71 & 37.5& Class II& MHO 5          & Spectral type\\
+% \hline
+% \end{tabular}
+% \end{table*}
 
 
-\FloatBarrier %\usepackage{placeins}
-\twocolumn
-%_____________________________________________________________
-% A rotated single page table
-%-------------------------------------------------------------
-% This is the start of the page
-\begin{sidewaystable*}
-\section{Rotated single page tables}
-To prevent a blank page with \{sidewaystable*\}, we use the method
-described in appendix B: declare the table first, and the section second.
-%
+% \FloatBarrier %\usepackage{placeins}
+% \twocolumn
+% %____________________________________________________________
+% % A long table in appendix
+% %------------------------------------------------------------
+% % This is the start of the page
+% \onecolumn
+% \section{Long tables in appendices}
+% For long tables (multipage) in appendices, we use the method described in appendix A.
+% For long landscape tables, please refer to Appendix E.
+% \begin{longtable}{lllrrr}
+% %
 
-\caption{A rotated table with \{sidewaystable*\}}
-\label{table:4} 
-\centering
-\begin{tabular}{crrlcl}
-\hline        
-ISO-L1551 & $F_{6.7}$~[mJy] & $\alpha_{6.7-14.3}$ & YSO type$^{d}$ & Status & Comments \\
-\hline
-  \multicolumn{6}{c}{\it New YSO candidates}\\ % To combine 6 columns into a single one
-\hline
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-  1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
-  2 & 0.79:           & 0.97: & Class II ?     & New & \\
-  3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
-  5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
-\hline
-  \multicolumn{6}{c}{\it Previously known YSOs} \\
-\hline
-  61 & 0.89 $\pm$ 0.58 & 1.77 & Class I & \object{HH 30} & Circumstellar disk\\
-  96 & 38.34 $\pm$ 0.71 & 37.5& Class II& MHO 5          & Spectral type\\
-\hline
-\end{tabular}
-\end{sidewaystable*}
-
-
-\FloatBarrier %\usepackage{placeins}
-\twocolumn
-%_____________________________________________________________
-% A rotated long table in appendix
-%-------------------------------------------------------------
-% This is the start of the page
-\onecolumn
-\begin{landscape}
-\section{Rotated long tables in appendices}
-For rotated long tables in appendices, we use the method
-described in appendix A, combined with \{landscape\}.
-\begin{longtable}{lllrrr}
-%
-
-\caption{A long landscape table}\\
-\hline\hline
-\label{lsltapp} 
-
-Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
-\hline
-\endfirsthead
-\caption{continued.}\\
-\hline\hline
-Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
-\hline
-\endhead
-\hline
-\endfoot
-%%
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86
-\footnote{Source not included in the HRI catalog. See Sect.~5.4.2 for details.}
-         & 5.92 & K0 V & 10.91& S & 0.058230\\
-         Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
-Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
-Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
-Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
-         &      &      &      & H & 0.008686\\
-Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   
-\end{longtable}
-\end{landscape}
+% \caption{A long table}\\
+% \label{ltapp} \\
+% \hline\hline
+% Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
+% \hline
+% \endfirsthead
+% \caption{continued.}\\
+% \hline
+% Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
+% \hline
+% \endhead
+% \hline
+% \endfoot
+% %%
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86
+% \footnote{Source not included in the HRI catalog. See Sect.~5.4.2 for details.}
+%          & 5.92 & K0 V & 10.91& S & 0.058230\\
+%                   & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
+%          & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
+%          & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\            & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   
+% \end{longtable}
 
 
-\FloatBarrier %\usepackage{placeins}
-\clearpage
+% \FloatBarrier %\usepackage{placeins}
+% \twocolumn
+% %_____________________________________________________________
+% % A rotated single page table
+% %-------------------------------------------------------------
+% % This is the start of the page
+% \begin{sidewaystable*}
+% \section{Rotated single page tables}
+% To prevent a blank page with \{sidewaystable*\}, we use the method
+% described in appendix B: declare the table first, and the section second.
+% %
+
+% \caption{A rotated table with \{sidewaystable*\}}
+% \label{table:4} 
+% \centering
+% \begin{tabular}{crrlcl}
+% \hline        
+% ISO-L1551 & $F_{6.7}$~[mJy] & $\alpha_{6.7-14.3}$ & YSO type$^{d}$ & Status & Comments \\
+% \hline
+%   \multicolumn{6}{c}{\it New YSO candidates}\\ % To combine 6 columns into a single one
+% \hline
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+%   1 & 1.56 $\pm$ 0.47 & --    & Class II$^{c}$ & New & Mid\\
+%   2 & 0.79:           & 0.97: & Class II ?     & New & \\
+%   3 & 4.95 $\pm$ 0.68 & 3.18  & Class II / III & New & \\
+%   5 & 1.44 $\pm$ 0.33 & 1.88  & Class II       & New & \\
+% \hline
+%   \multicolumn{6}{c}{\it Previously known YSOs} \\
+% \hline
+%   61 & 0.89 $\pm$ 0.58 & 1.77 & Class I & \object{HH 30} & Circumstellar disk\\
+%   96 & 38.34 $\pm$ 0.71 & 37.5& Class II& MHO 5          & Spectral type\\
+% \hline
+% \end{tabular}
+% \end{sidewaystable*}
+
+
+% \FloatBarrier %\usepackage{placeins}
+% \twocolumn
+% %_____________________________________________________________
+% % A rotated long table in appendix
+% %-------------------------------------------------------------
+% % This is the start of the page
+% \onecolumn
+% \begin{landscape}
+% \section{Rotated long tables in appendices}
+% For rotated long tables in appendices, we use the method
+% described in appendix A, combined with \{landscape\}.
+% \begin{longtable}{lllrrr}
+% %
+
+% \caption{A long landscape table}\\
+% \hline\hline
+% \label{lsltapp} 
+
+% Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
+% \hline
+% \endfirsthead
+% \caption{continued.}\\
+% \hline\hline
+% Catalogue& $M_{V}$ & Spectral & Distance & Mode & Count Rate \\
+% \hline
+% \endhead
+% \hline
+% \endfoot
+% %%
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86
+% \footnote{Source not included in the HRI catalog. See Sect.~5.4.2 for details.}
+%          & 5.92 & K0 V & 10.91& S & 0.058230\\
+%          Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\
+% Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   Gl 33    & 6.37 & K2 V & 7.46 & S & 0.043170\\
+% Gl 66AB  & 6.26 & K2 V & 8.15 & S & 0.260478\\
+% Gl 68    & 5.87 & K1 V & 7.47 & P & 0.026610\\
+%          &      &      &      & H & 0.008686\\
+% Gl 86    & 5.92 & K0 V & 10.91& S & 0.058230\\   
+% \end{longtable}
+% \end{landscape}
+
+
+% \FloatBarrier %\usepackage{placeins}
+% \clearpage
 
 
 \end{appendix}
