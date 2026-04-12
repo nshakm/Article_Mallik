@@ -1,16 +1,16 @@
 \begin{table*}[!t]
     \centering
-    \begin{tabular}{lcllcl}
+    \begin{tabular}{lcllcll}
     \hline
     \hline
-    Reference & Number of Planets    & TE Tool              & H/He EoS      & $Z_{\text{env}}$ & Atmospheric Model      \\
+    Reference & Number of Planets    & TE Tool              & H/He EoS      & $Z_{\text{env}}$ & Atmospheric Model  & Inference Method     \\
     \hline
-    -         & 80                   & \texttt{GASTLI}      & CD21          & 0.014            & \texttt{petitCODE} \\
-    -         & 80                   & \texttt{planetsynth} & CD21          & 0.012            & Freedman? (grey)                   \\
-    P25       & 43                   & \texttt{CEPAM}       & CMS19 + HG23* & 0*               & Parmentier*               \\
-    T19       & 33                   & private              & ScVH (T16)    & ?                & Fortney?                  \\
+    -         & 80                   & \texttt{GASTLI}      & CD21          & 0.014            & \texttt{petitCODE} & MCMC \\
+    -         & 80                   & \texttt{planetsynth} & CD21          & 0.012            & Freedman? (grey)   & MCMC \\
+    P25       & 43                   & \texttt{CEPAM}       & CMS19 + HG23* & 0*               & Parmentier*        & Root-finding       \\
+    T19       & 33                   & private              & ScVH (T16)    & ?                & Fortney?           & MCMC       \\
     \hline
     \end{tabular}
-    \caption{Summary of the physical assumptions and modelling frameworks for the four tools compared in this study. For each tool, we list the thermal evolution (TE) code, the adopted H/He (EoS), the envelope metallicity ($Z_{\text{env}}$), the atmospheric boundary condition model, and the total number of planets in the respective planet catalogues.}
+    \caption{Summary of the physical assumptions and modelling frameworks for the four tools compared in this study. For each tool, we list the total number of planets in the respective planet catalogues, thermal evolution (TE) tool, adopted H/He EoS, envelope metallicity $Z_{\text{env}}$, atmospheric boundary condition model, and the inference method.}
     \label{tab:EoS_and_atm_model}
 \end{table*}
